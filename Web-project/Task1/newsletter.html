@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color:#ccd4e4;
+            text-align: center;
+        }
+        div{
+            background-color: white;
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px 10px 10px 10px ;
+            box-shadow: 5px 10px 18px #888888;
+        }
+        h2{
+            color:#121212;
+            
+        }
+        img{
+            height: auto;
+            width: 100%;
+            max-width: 380px;
+            display: block;
+            margin: 0 auto;
+            border: 5px solid blue;
+            border-radius: 10px 10px 10px 10px ;
+            box-shadow: 5px 10px 18px #888888;
+            margin-top: 20px;
+        }
+        p{
+            color:#121212;
+            font-size: 15px;
+            margin:18px;
+            line-height: 1.5;
+            text-shadow: 2px 4px 4px  #456bb7;
+          
+        }
+        input{
+            border:2px solid #121212;
+            padding:5px;
+            color:#121212;
+            font-size: 18px;
+            display: block;
+            margin: 0 auto;
+    
+        }
+        button{
+            background-color:#121212;
+            color:white;
+            padding:10px 20px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            display: block;
+            margin: 0 auto; /* centers horizontally */
+        }
+        #terms{
+            text-decoration:underline #456bb7;
+        }
+    
+    </style>
+
+</head>
+<body>
+    <div>
+    <h2> The Daily Dribble </h2>
+    <img src="https://images.pexels.com/photos/34123182/pexels-photo-34123182.jpeg" alt="mountains shadows"> 
+    <br>
+    <p>Your daily dose of stories directly at your desktop. Tech news, Interview Experience and much more</p>
+    <form onsubmit="return false;">
+        <input type="email" placeholder="Enter Your Email">
+        <br>
+        <button type="submit"> Join Now </button>
+    </form>
+    <p id="terms"> Read our Terms and Conditions here </p>
+    </div>
+
+</body>
+</html>
