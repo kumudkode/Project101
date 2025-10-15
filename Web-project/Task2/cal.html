@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <style>
+       body {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px 0;
+    margin: 0;
+    text-align: center;
+    background: #27112c;
+
+}
+div{
+    background: white;
+    width: 400px;
+    height: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px #e799d0;
+}
+span {
+    border-bottom: 2px solid black;
+    padding: 4px;
+}
+
+button {
+    margin: 20px 0;
+    background: white;
+    color: black;
+    border: 1px solid black;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 8px;
+}
+
+        </style>
+    </head>
+
+    <body>
+        <div>
+        <span id="num1-el"></span>
+        <span id="num2-el"></span>
+        <br>
+        <button onclick="add()">Add</button>
+        <button onclick="sub()">Subtract</button>
+        <button onclick="div()">Divide</button>
+        <button onclick="mul()">Multiply</button>
+        <br>
+        <span id="sum-el">Sum: </span>
+        <span id="sub-el">Sub: </span>
+        <span id="div-el">Div: </span>
+        <span id="mul-el">Mul: </span>
+
+        <script src="cal.js"></script>
+        </div>
+    </body>
+</html>
