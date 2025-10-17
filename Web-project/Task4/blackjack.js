@@ -6,9 +6,11 @@ let isAlive = true
 let message = ""
 console.log(sum)
 
+// delete lines 9 to 11
 let messageEl = document.getElementById("message-el")
 // 2. Store the sum paragraph in a variable called sumEl
 let sumEl = document.getElementById("sum-el")
+
 console.log(sumEl)
 // if we get <21 less than 21 then we need some more to reach 21 
 // if we get above 21 oops out from game
