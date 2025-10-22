@@ -10,6 +10,9 @@ console.log(sum)
 let messageEl = document.getElementById("message-el")
 // 2. Store the sum paragraph in a variable called sumEl
 let sumEl = document.getElementById("sum-el")
+// or we can use querySelector
+// let sumEl = document.querySelector("#sum-el")
+// Here we have to specify about the type of content we want to show in sumEl, here its id = #sum-el
 
 console.log(sumEl)
 // if we get <21 less than 21 then we need some more to reach 21 
