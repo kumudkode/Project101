@@ -1,32 +1,53 @@
-let player1Time = 102
-let player2Time = 107
+// 2. Use getRandomCard() to set the values of firstCard and secondCard
+let firstCard = 10
+let secondCard = 4
+let cards = [firstCard, secondCard]
+let sum = firstCard + secondCard
+let hasBlackJack = false
+let isAlive = true
+let message = ""
+let messageEl = document.getElementById("message-el")
+let sumEl = document.getElementById("sum-el")
+let cardsEl = document.getElementById("cards-el")
 
-// cmd+d - ctrl+d
-function getFastestRaceTime() {
-    if (player1Time < player2Time) {
-       // return player1Time 
-        console.log(player1Time)
-    } else if (player2Time < player1Time) {
-        //return player2Time 
-        console.log(player2Time)
-    } else {
-        //return player1Time 
-        console.log(player1Time)
+// 1. Create a function, getRandomCard(), that always returns the number 5
+function getRandomCard(){
+    return 5
+}
+firstCard = getRandomCard()
+secondCard = getRandomCard()
+
+function startGame() {
+    renderGame()
+}
+
+function renderGame() {
+    cardsEl.textContent = "Cards: "
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + " "
     }
+    
+    sumEl.textContent = "Sum: " + sum
+    if (sum <= 20) {
+        message = "Do you want to draw a new card?"
+    } else if (sum === 21) {
+        message = "You've got Blackjack!"
+        hasBlackJack = true
+    } else {
+        message = "You're out of the game!"
+        isAlive = false
+    }
+    messageEl.textContent = message
 }
 
-let fastestRace = getFastestRaceTime()
-console.log(fastestRace)
-// now value  of fastestRace is undefined because function didn't return anything if we want to store the value in variable we need to return the value from function
 
-// Write a function that returns the total race time
-function totalRaceTime(){
-    return player1Time + player2Time
+function newCard() {
+    // 3. Use the getRandomCard() to set the value of card
+    
+   
+    let card = 6
+    sum += card
+    cards.push(card)
+    console.log(cards)
+    renderGame()
 }
-let total =  totalRaceTime()
-console.log(total)
-// Call/invoke the function and store the returned value in a new variable
-// Finally, log the variable out
-
-
-
