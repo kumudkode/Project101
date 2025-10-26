@@ -177,6 +177,10 @@
 -- AND (brand NOT IN ('Ford', 'Triumph', 'Chevrolet', 'Dodge')
 -- OR price < 50000);
 
+-- -----------------------------------------------------------------------------
+-- # Challenge one	
+-- ------------------------------------------------------------------------------
+
 /*
 	Select brand, model, and color from cars
 		where the color is not red, blue, or white
@@ -194,7 +198,20 @@
 		or the brand is either 'Ford' or 'Triumph' and the car is from the 70s
 		only select cars where sold is not true
 */
-SELECT brand, model, year, sold FROM cars
-WHERE (brand = 'Dodge' AND year BETWEEN 1960 AND 1969
-OR (brand IN ('Ford', 'Triumph') AND year BETWEEN 1970 AND 1979))
-AND sold IS NOT TRUE;
+-- SELECT brand, model, year, sold FROM cars
+-- WHERE (brand = 'Dodge' AND year BETWEEN 1960 AND 1969
+-- OR (brand IN ('Ford', 'Triumph') AND year BETWEEN 1970 AND 1979))
+-- AND sold IS NOT TRUE;
+
+/*
+	Select brand, model, and color from cars
+		where the color is 'red'
+		and the brand is not 'Ferrari'
+		and the car has not been sold
+*/
+-- SELECT brand, model, color FROM cars
+-- WHERE color  LIKE '%red%'
+-- AND brand != 'Ferrari'
+-- AND sold IS FALSE;
+-- -----------------------------------------------------------------------------
+-- End of Challenge one
