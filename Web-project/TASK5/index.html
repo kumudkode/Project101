@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeLearn - Interactive Coding Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>CodeLearn</span>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn-login">Log In</button>
+                    <button class="btn-signup">Sign Up</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Learn to Code by <span class="highlight">Building Real Projects</span></h1>
+                <p class="hero-description">Master web development through interactive screencasts. Code along with industry experts and build your portfolio.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Start Learning Free</button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-play"></i> Watch Demo
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500K+</h3>
+                        <p>Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>200+</h3>
+                        <p>Courses</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Instructors</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="code-editor-preview">
+                    <div class="editor-header">
+                        <div class="editor-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="editor-title">app.js</span>
+                    </div>
+                    <div class="editor-content">
+                        <pre><code><span class="keyword">const</span> <span class="variable">greeting</span> = <span class="string">"Hello World!"</span>;
+<span class="keyword">function</span> <span class="function">learn</span>() {
+  <span class="variable">console</span>.<span class="method">log</span>(<span class="variable">greeting</span>);
+  <span class="keyword">return</span> <span class="string">"Keep coding!"</span>;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Courses</h2>
+                <p>Choose from our most-loved courses taught by industry experts</p>
+            </div>
+            <div class="course-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                <button class="filter-btn" data-filter="react">React</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="css">CSS</button>
+            </div>
+            <div class="course-grid">
+                <!-- Course Card 1 -->
+                <div class="course-card" data-category="javascript">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400" alt="JavaScript Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Beginner</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 8 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 120 lessons</span>
+                        </div>
+                        <h3>JavaScript Fundamentals</h3>
+                        <p>Master the basics of JavaScript and build interactive web applications</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="Author">
+                                <span>John Doe</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="course-card" data-category="react">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400" alt="React Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Intermediate</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 12 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 150 lessons</span>
+                        </div>
+                        <h3>React Complete Guide</h3>
+                        <p>Build modern web apps with React, Hooks, and Redux</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="Author">
+                                <span>Sarah Smith</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="course-card" data-category="python">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400" alt="Python Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Beginner</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 10 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 130 lessons</span>
+                        </div>
+                        <h3>Python for Beginners</h3>
+                        <p>Learn Python from scratch and build real-world projects</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="Author">
+                                <span>Mike Johnson</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div class="course-card" data-category="css">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=400" alt="CSS Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Advanced</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 6 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 90 lessons</span>
+                        </div>
+                        <h3>Advanced CSS & Sass</h3>
+                        <p>Master modern CSS techniques, animations, and Sass</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=4" alt="Author">
+                                <span>Emma Wilson</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 5 -->
+                <div class="course-card" data-category="javascript">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400" alt="Node.js Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Intermediate</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 14 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 180 lessons</span>
+                        </div>
+                        <h3>Node.js Backend Development</h3>
+                        <p>Build scalable backend applications with Node.js and Express</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="Author">
+                                <span>David Lee</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="course-card" data-category="react">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400" alt="Full Stack Course">
+                        <div class="course-overlay">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                        </div>
+                        <span class="course-badge">Advanced</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="far fa-clock"></i> 20 hours</span>
+                            <span class="course-lessons"><i class="fas fa-video"></i> 250 lessons</span>
+                        </div>
+                        <h3>Full Stack MERN Developer</h3>
+                        <p>Complete MERN stack course: MongoDB, Express, React, Node.js</p>
+                        <div class="course-footer">
+                            <div class="course-author">
+                                <img src="https://i.pravatar.cc/150?img=6" alt="Author">
+                                <span>Anna Brown</span>
+                            </div>
+                            <div class="course-rating">
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose CodeLearn?</h2>
+                <p>Experience the most interactive way to learn coding</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Interactive Screencasts</h3>
+                    <p>Pause the video anytime and edit the code directly in the player. See your changes instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Real Projects</h3>
+                    <p>Build actual projects that you can add to your portfolio and show to employers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Support</h3>
+                    <p>Join thousands of learners and get help from our supportive community.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Certificates</h3>
+                    <p>Earn certificates of completion to showcase your skills on LinkedIn.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Learn Anywhere</h3>
+                    <p>Access courses on any device - desktop, tablet, or mobile.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Lifetime Access</h3>
+                    <p>Get unlimited access to all courses with a single subscription.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Plan</h2>
+                <p>Start learning today with our flexible pricing options</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">
+                        <span class="amount">$0</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Access to 10 free courses</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li><i class="fas fa-check"></i> Basic coding challenges</li>
+                        <li class="disabled"><i class="fas fa-times"></i> No certificates</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Limited project files</li>
+                    </ul>
+                    <button class="btn-pricing">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">
+                        <span class="amount">$29</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Unlimited course access</li>
+                        <li><i class="fas fa-check"></i> All certificates</li>
+                        <li><i class="fas fa-check"></i> Download project files</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Exclusive workshops</li>
+                    </ul>
+                    <button class="btn-pricing">Start Free Trial</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Team</h3>
+                    <div class="price">
+                        <span class="amount">$99</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Everything in Pro</li>
+                        <li><i class="fas fa-check"></i> Up to 10 team members</li>
+                        <li><i class="fas fa-check"></i> Team dashboard</li>
+                        <li><i class="fas fa-check"></i> Progress tracking</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                    </ul>
+                    <button class="btn-pricing">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Coding Journey?</h2>
+                <p>Join 500,000+ students learning to code with CodeLearn</p>
+                <button class="btn-cta">Start Learning for Free</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-code"></i>
+                        <span>CodeLearn</span>
+                    </div>
+                    <p>The interactive coding platform that helps you learn by doing.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">React</a></li>
+                        <li><a href="#">Python</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">Node.js</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CodeLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
