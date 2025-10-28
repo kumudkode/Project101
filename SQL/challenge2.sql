@@ -221,3 +221,16 @@
 -- WHERE price BETWEEN 20000 AND 60000
 -- AND condition BETWEEN 1 AND 3
 -- AND color LIKE '%red%';
+/*
+	Select the brand and average price of cars
+		where the cars have been sold
+		group by brand
+		only show brands where the average price is greater than $50,000
+		order by average price in descending order
+*/
+-- SELECT brand, AVG(price) AS average_price FROM cars
+-- WHERE sold IS TRUE
+-- GROUP BY brand
+-- HAVING AVG(price) > 50000
+-- ORDER BY average_price DESC;
+
