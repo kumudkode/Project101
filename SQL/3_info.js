@@ -64,10 +64,13 @@ import fs from 'fs';
 `);
 
   // Load the SQL file
-  const query = fs.readFileSync('3_info.sql', 'utf8');
+  const query = fs.readFileSync('info.sql', 'utf8');
 
-  // Executing simple queries for sections 1 - 3
-  const response = await db.query(query);
+  // Use exec() for multiple statements, then query to get results
+  await db.exec(query);
+
+  // Get the final results
+  const response = await db.query('SELECT brand, model, year, color, condition, price, sold FROM cars ORDER BY year DESC');
 
   console.clear();
   console.table(response.rows);
