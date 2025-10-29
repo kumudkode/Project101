@@ -234,3 +234,4 @@
 -- HAVING AVG(price) > 50000
 -- ORDER BY average_price DESC;
 
+
