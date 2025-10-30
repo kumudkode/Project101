@@ -107,11 +107,13 @@ In javascript command we add like this
 ---------------Delete DATA example----------------
 -- The Aston Martin V8 Vantage has been sold and removed from the inventory
 -- Delete the car from the cars table
-DELETE FROM cars
-WHERE model = 'V8 Vantage' AND year = 1977;
-SELECT brand, model, year, color, condition, price, sold FROM cars
-ORDER BY year DESC;
+-- DELETE FROM cars
+-- WHERE model = 'V8 Vantage' AND year = 1977;
+-- SELECT brand, model, year, color, condition, price, sold FROM cars
+-- ORDER BY year DESC;
 
+-- ------------------------------------
+-- End of DATA Manipulation Commands or CRUD commands
 
 
 
