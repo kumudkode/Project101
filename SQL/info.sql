@@ -88,12 +88,21 @@ In javascript command we add like this
 */
 -- Insert the two new cars into the cars table
 
-INSERT INTO cars (brand, model, year, color, condition, price, sold)
-VALUES
-    ('Ford', 'Escort RS2000', 1978, 'blue', 4, 39000, FALSE),
-    ('Aston Martin', 'V8 Vantage', 1977, 'dark green', 5, 145000, FALSE);
-SELECT brand, model, year, color, condition, price, sold FROM cars
-ORDER BY year DESC; 
+-- INSERT INTO cars (brand, model, year, color, condition, price, sold)
+-- VALUES
+--     ('Ford', 'Escort RS2000', 1978, 'blue', 4, 39000, FALSE),
+--     ('Aston Martin', 'V8 Vantage', 1977, 'dark green', 5, 145000, FALSE);
+-- SELECT brand, model, year, color, condition, price, sold FROM cars
+-- ORDER BY year DESC; 
+
+---------------Update DATA example----------------
+-- The Ford Escort RS2000 has just been sold for $38,000
+-- Update the cars table to reflect this sale
+-- UPDATE cars
+-- SET sold = TRUE, price = 38000
+-- WHERE model = 'Escort RS2000' AND year = 1978;
+-- SELECT brand, model, year, color, condition, price, sold FROM cars
+-- ORDER BY year DESC;
 
 
 
