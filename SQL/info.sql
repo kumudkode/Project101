@@ -104,6 +104,14 @@ In javascript command we add like this
 -- SELECT brand, model, year, color, condition, price, sold FROM cars
 -- ORDER BY year DESC;
 
+---------------Delete DATA example----------------
+-- The Aston Martin V8 Vantage has been sold and removed from the inventory
+-- Delete the car from the cars table
+DELETE FROM cars
+WHERE model = 'V8 Vantage' AND year = 1977;
+SELECT brand, model, year, color, condition, price, sold FROM cars
+ORDER BY year DESC;
+
 
 
 
