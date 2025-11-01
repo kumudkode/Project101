@@ -36,3 +36,10 @@ and many more...
 -- LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
 -- Example of RIGHT JOIN
 -- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
+-- FROM Customers
+-- RIGHT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+-- Example of FULL JOIN
+-- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
+-- FROM Customers
+-- FULL JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
