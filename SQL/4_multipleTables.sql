@@ -33,3 +33,6 @@ and many more...
 -- Example of LEFT JOIN
 -- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
 -- FROM Customers
+-- LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+-- Example of RIGHT JOIN
+-- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
