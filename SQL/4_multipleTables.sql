@@ -30,3 +30,6 @@ and many more...
 -- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
 -- FROM Customers
 -- INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+-- Example of LEFT JOIN
+-- SELECT Customers.FirstName, Customers.LastName, Orders.OrderID, Orders.TotalAmount
+-- FROM Customers
