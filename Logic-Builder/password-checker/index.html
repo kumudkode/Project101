@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Password-checker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: cadetblue;
+        }
+
+        body,
+        h1 {
+            margin: 0;
+            font-family: cursive;
+        }
+
+        header {
+            background-color: grey;
+            text-align: center;
+            padding: 5px 10px;
+            display: block;
+            margin: 10px 150px;
+            color: #f4f4f4;
+            background-color: rgba(9, 9, 134, 0.253);
+        }
+
+        form {
+            text-align: center;
+            padding: 10px 40px;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            box-shadow: 1px 1px 5px 1px red;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        input {
+            border-radius: 5px;
+            padding: 8px 10px;
+            box-shadow: 1px 1px 5px 1px green;
+            border: none;
+            font-size: 14px;
+        }
+
+        label {
+            color: #f4f4f4;
+            text-shadow: 2px 2px 2px blue;
+            font-size: 16px;
+        }
+
+        #page {
+            display: block;
+            text-align: start;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            box-shadow: 1px 1px 5px 1px rgb(0, 85, 255);
+            font-family: monospace;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Style for result message */
+        #result {
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 20px;
+            background-color: rgb(255, 255, 255);
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Password-checker</h1>
+    </header>
+    <section id="fields">
+        <form>
+            <label for="email">Enter your Email:</label>
+            <input type="email" placeholder="abc@gmail.com" id="email">
+            <br><br>
+            <label for="password">Enter your Password:</label>
+            <input type="text" placeholder="abc123xy" id="password">
+            <br><br>
+            <button type="button" onclick="checkDetails()">
+                🔥Check details
+            </button>
+
+            <!-- THIS IS WHERE THE RESULT SHOWS -->
+            <div id="result"></div>
+
+            <br>
+            <section>
+                <div id="page">
+                    <h4 style="text-align: center; font-size: larger;">Basic logic</h4>
+                    <ol>
+                        <li>Get the password from user</li>
+                        <li>Check the length - is it 8 or more characters?</li>
+                        <li>Check if there's at least one number (0-9)</li>
+                        <li>Check if there's at least one uppercase letter (A-Z)</li>
+                        <li>If ALL checks pass → password is strong</li>
+                        <li>If ANY check fails → password is weak, tell them why</li>
+                    </ol>
+                </div>
+            </section>
+        </form>
+    </section>
+    <script>
+        // Logic 1: Check the length - is it 8 or more characters?
+        function checkLength(password) {
+            if (password.length >= 8) {
+                return true;
+            }
+            return false;
+        }
+
+        // Logic 2: Check if there's at least one number (0-9)
+        function checkNumber(password) {
+            for (let i = 0; i < password.length; i++) {
+                let char = password[i];
+                if (char >= '0' && char <= '9') {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Logic 3: Check if there is at least one UpperCase letter A-Z
+        function checkUpper(password) {
+            for (let j = 0; j < password.length; j++) {
+                let cas = password[j];
+                if (cas >= 'A' && cas <= 'Z') {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Combine everything
+        function checkDetails() {
+            let password = document.getElementById('password').value;
+            let resultDiv = document.getElementById('result');
+
+            // Check if password is empty
+            if (password === '') {
+                resultDiv.innerHTML = '⚠️ Please enter a password';
+                resultDiv.style.color = 'orange';
+                return;
+            }
+
+            // Run all checks
+            let length = checkLength(password);
+            let number = checkNumber(password);
+            let upperCase = checkUpper(password);
+
+            // Display result on the page
+            if (length && number && upperCase) {
+                resultDiv.innerHTML = "✔️ Strong password!";
+                resultDiv.style.color = "green";
+            } else {
+                let problems = [];
+                if (!length) problems.push("too short (need 8+ chars)");
+                if (!number) problems.push("needs a number");
+                if (!upperCase) problems.push("needs an uppercase letter");
+
+                resultDiv.innerHTML = "❌ Weak password: " + problems.join(", ");
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>
