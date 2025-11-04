@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        header{
+            padding: 20px;
+            font-family: sans-serif;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+          
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            gap: 15px;
+
+        }
+        a{
+            
+            text-decoration: none;
+            color: inherit; 
+        }
+        main{
+            
+             text-align: center; /* Centers the text (h1 and p) */
+             margin-top: 100px; /* Pushes the content down a bit */
+        
+        }
+        h2{
+            font-family: cursive; /* To mimic the handwritten font */
+            font-size: 3em;
+           }
+
+        p {
+           font-size: 0.9em;
+           color: grey;
+            }
+        table, th, td{
+           border: 1px solid black;
+           text-align: center;
+           
+        
+        }
+        #articles{
+            display: flex;
+            align-items: center;
+        }
+       .one{
+        display: flex;
+        border: 1px solid black;
+        margin: 20px;
+        padding: 50px;
+        border-radius: 30px;
+       }
+       footer{
+        text-align: center;
+       }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <span>🔥 </span> Your name
+        </div>
+        <div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#project">Projects</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#Contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <h2>Frontend Developer</h2>
+        <p>html only with proper layout, no styling</p>
+    </main>
+    <hr><hr>
+    <br>
+    <section id="project">
+     <table>
+        <tr>
+            <th>Projects</th>
+            <th>Work Experience </th>
+            <th> Education </th>
+        </tr>
+        <tr>
+            <td rowspan="1">Html Only Portfolio</td>
+            <td rowspan="2"> roadmap.sh 
+                <br> Solved all the frontend Projects
+                <br>
+                <a href="#profile">Visit my Profile</a>
+            </td>
+            <td rowspan="2.5"> Graduated with 3.76 out of 4 CGPA. 
+            <br> Won Acme Hackathon.
+            <br> Organized 30 Sessions.
+            </td>
+            
+        </tr>
+        <tr>
+             <td> Calculator </td>
+          
+          
+        </tr>
+        <tr>
+             <td> Quiz app </td>
+               <td rowspan="3"> OpenSource Work
+            <br>
+            <br> Contributed  to 50+ OpenSource Projects.
+            <br> Made my own projects with 200 Github Stars  
+            <br>
+            <a href="#github">Visit my Github Profile</a>
+            </td>
+               <td rowspan="3"> Course I took:
+                <ul>
+                    <li> OOP </li>
+                    <li> DSA </li>
+                    <li> Web Engineering </li>
+                    <li> AI </li>
+                    <li> Computer Graphic</li>
+                </ul>
+            </td>
+             
+        </tr>
+        <tr>
+            <td> Countdown Timer </td>
+        </tr>
+        <tr>
+             <td> Product Upcoming Page</td>
+        </tr>
+     </table>
+     <br>
+     <hr><hr>
+    </section>
+     <h4 style="text-align:center" > Reviews From My Teachers </h4>
+    <section id="articles"> 
+        <div class="one">
+            John doe was a brilliant student
+        </div>
+        <div class="one">
+            John doe was a brilliant student
+        </div>
+        <div class="one">
+            John doe was a brilliant student
+        </div>
+       
+
+    </section>
+   <footer>
+    <p> ©️ all right reserved </p>
+   </footer>
+</body>
+</html>
