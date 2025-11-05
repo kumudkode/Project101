@@ -7,8 +7,15 @@
     <style>
         body{
             margin:0px;
-            padding: 0px;
+            padding: 0px 40px;
             box-sizing: border-box;
+            min-width: 900px; 
+           
+        }
+        #content{
+             border: 1px solid black;
+             padding: 0px 40px;
+             margin: 40px 30px;
         }
         header{
             padding: 20px;
@@ -32,7 +39,6 @@
         main{
             
              text-align: center; /* Centers the text (h1 and p) */
-             margin-top: 100px; /* Pushes the content down a bit */
         
         }
         h2{
@@ -44,6 +50,11 @@
            font-size: 0.9em;
            color: grey;
             }
+        
+        #project{
+            display: block;
+            padding: 40px 40px;
+        }
         table, th, td{
            border: 1px solid black;
            text-align: center;
@@ -60,16 +71,25 @@
         margin: 20px;
         padding: 50px;
         border-radius: 30px;
+            background-color: white;
+            box-shadow: 2px 2px 0 0 var(--primary-color); /* Simple shadow to mimic sketch */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
        }
+       .one:hover{
+        transform: translate(-3px, -3px); /* Lift and shift */
+        box-shadow: 5px 5px 0 0 var(--accent-color); /* Change shadow color */
+        }
+       
        footer{
         text-align: center;
        }
     </style>
 </head>
 <body>
+    <div id="content">
     <header>
         <div>
-            <span>🔥 </span> Your name
+             🔥your name
         </div>
         <div>
             <ul>
@@ -100,7 +120,7 @@
                 <br>
                 <a href="#profile">Visit my Profile</a>
             </td>
-            <td rowspan="2.5"> Graduated with 3.76 out of 4 CGPA. 
+            <td rowspan="2"> Graduated with 3.76 out of 4 CGPA. 
             <br> Won Acme Hackathon.
             <br> Organized 30 Sessions.
             </td>
@@ -139,8 +159,9 @@
         </tr>
      </table>
      <br>
-     <hr><hr>
+    
     </section>
+     <hr><hr>
      <h4 style="text-align:center" > Reviews From My Teachers </h4>
     <section id="articles"> 
         <div class="one">
@@ -158,5 +179,6 @@
    <footer>
     <p> ©️ all right reserved </p>
    </footer>
+   </div>
 </body>
 </html>

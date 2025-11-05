@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer Portfolio Sketch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+    /* Global Reset and Box Model */
+    :root {
+        --primary-color: black;
+        --accent-color: #007bff; /* A nice blue for interaction */
+        --light-gray: #f0f0f0; /* Lighter background for better contrast with 3D elements */
+        --glass-white: rgba(255, 255, 255, 0.5); /* Semi-transparent white for glass */
+        --glass-shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0 40px;
+        box-sizing: border-box;
+        line-height: 1.5;
+        min-width: 900px;
+        background-color: var(--light-gray); /* Set the lighter background */
+        cursor: none;
+        position: relative;
+        
+    }
+
+    /* ------------------- Custom Cursor (Dot) ------------------- */
+    .dot-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        /* transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease; */
+        transition: 
+        transform 0.1s ease-out, /* Added transform transition for movement */
+        width 0.2s ease, 
+        height 0.2s ease, 
+        background-color 0.2s ease;
+    }
+
+    .dot-cursor.hovered {
+        width: 24px;
+        height: 24px;
+        background-color: var(--accent-color);
+    }
+
+    /* ------------------- Header and Navigation (Unchanged) ------------------- */
+    header {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0%;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+        color: var(--accent-color);
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* ------------------- Main Title (Unchanged) ------------------- */
+    .hero-title {
+        text-align: center;
+        padding: 50px 0 10px;
+    }
+
+    .hero-title h1 {
+        font-family: 'Permanent Marker', cursive;
+        font-size: 3.5em;
+        margin: 0;
+        animation: fadeInDown 1s ease-out;
+    }
+
+    .hero-title p {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 5px;
+        animation: fadeInUp 1s ease-out 0.5s backwards;
+    }
+
+    /* ------------------- Main 3-Column Section (Glassy 3D Effect) ------------------- */
+    .main-content {
+        display: flex;
+        /* Replaced solid border/shadow with glassy effects */
+        background: var(--glass-white); /* Frosted background */
+        box-shadow: 
+            5px 5px 10px var(--glass-shadow),  /* Outer soft shadow for lift */
+            -5px -5px 10px white; /* Light inner shadow for subtle curvature */
+        margin-top: 30px;
+        border-radius: 15px; /* Added rounded corners for smooth look */
+        overflow: hidden; /* Contains the columns */
+        backdrop-filter: blur(5px); /* THE GLASS EFFECT */
+        -webkit-backdrop-filter: blur(5px); /* For Safari support */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .main-content:hover {
+        transform: scale(1.005); /* Slight scale for a dynamic feel */
+        box-shadow: 
+            8px 8px 15px var(--glass-shadow),
+            -8px -8px 15px white; 
+    }
+
+    .column {
+        padding: 20px;
+        flex: 1;
+        min-height: 450px;
+        background-color: transparent; /* Must be transparent to see the glass effect */
+    }
+
+    .column:not(:last-child) {
+        border-right: 1px solid rgba(0, 0, 0, 0.1); /* Lighter divider */
+    }
+
+    .column h2 {
+        margin-top: 0;
+        font-size: 1.4em;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Lighter divider */
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+
+    /* Projects List Styling (Minimal/Glassy boxes) */
+    .projects-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .projects-list li {
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+        margin-bottom: 10px; /* Separated items instead of overlap */
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.7); /* Light background for items */
+        transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .projects-list li:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: translateY(-2px); /* Lift up effect */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    }
+
+    /* Work Experience/Education List Styling (Unchanged) */
+    .work-section, .education-section {
+        margin-bottom: 20px;
+    }
+    .work-section h3, .education-section h3 {
+        font-size: 1.1em;
+        margin: 10px 0 5px;
+    }
+    .work-section a, .education-section a {
+        font-size: 0.9em;
+        color: var(--accent-color);
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .work-section a::after, .education-section a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0%;
+        height: 1px;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+    }
+
+    .work-section a:hover, .education-section a:hover {
+        color: var(--primary-color);
+    }
+    .work-section a:hover::after, .education-section a:hover::after {
+        width: 100%;
+    }
+
+    .education-section ul {
+        padding-left: 20px;
+        margin-top: 5px;
+    }
+    .education-section li {
+        font-size: 0.9em;
+    }
+
+    /* ------------------- Reviews Section (Glassy 3D Effect) ------------------- */
+    .reviews-section {
+        padding: 40px 0;
+    }
+
+    .reviews-section h2 {
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .reviews-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .review-box {
+        flex: 1;
+        /* Replaced sketch borders with glassy effects */
+        background: var(--glass-white);
+        border: 1px solid rgba(255, 255, 255, 0.8); /* Highlight border */
+        border-radius: 15px; /* Larger rounded corners */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        
+        /* Neumorphic/Glassy Shadow */
+        box-shadow: 
+            5px 5px 10px var(--glass-shadow),
+            -5px -5px 10px white;
+        
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .review-box:hover {
+        transform: translateY(-5px); /* Noticeable lift */
+        box-shadow: 
+            0 8px 15px rgba(0, 0, 0, 0.2), /* Hover shadow for deep lift */
+            -2px -2px 5px white;
+    }
+
+    .review-box .quote {
+        font-style: italic;
+        margin-bottom: 15px;
+    }
+
+    .review-box .name {
+        font-weight: bold;
+        margin-top: auto;
+    }
+
+    .review-box .title {
+        color: #888;
+        font-size: 0.9em;
+    }
+
+    /* ------------------- Footer (Minimal Border) ------------------- */
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    footer p {
+        font-size: 0.8em;
+        color: #333;
+    }
+
+    /* ------------------- Keyframe Animations (Unchanged) ------------------- */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div class="dot-cursor"></div> <header>
+        <div class="logo">
+            🔥your name
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero-title">
+        <h1>Frontend Developer</h1>
+        <p>HTML only with proper layout, no styling</p>
+    </div>
+
+    <div class="main-content">
+        
+        <div id="projects" class="column">
+            <h2>Projects</h2>
+            <ul class="projects-list">
+                <li>HTML Only Portfolio</li>
+                <li>Calculator</li>
+                <li>Quiz App</li>
+                <li>Countdown Timer</li>
+                <li>Product Upcoming Page</li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <h2>Work Experience</h2>
+            
+            <div class="work-section">
+                <h3>roadmap.sh</h3>
+                <p>Solved all the frontend projects</p>
+                <a href="#">Visit my Profile</a>
+            </div>
+
+            <div class="work-section">
+                <h3>OpenSource Work</h3>
+                <p>Contributed to 50 open-source projects. Made my own projects with 200 GitHub Stars</p>
+                <a href="#">Visit my GitHub Profile</a>
+            </div>
+        </div>
+
+        <div class="column">
+            <h2>Education</h2>
+            
+            <div class="education-section">
+                <p>Graduated with 3.76 out of 4 CGPA. Won Acme Hackathon. Organized 30 sessions.</p>
+                
+                <h3>Courses I took:</h3>
+                <ul>
+                    <li>Object Oriented Programming</li>
+                    <li>Data Structures and Algorithms</li>
+                    <li>Web Engineering</li>
+                    <li>Artificial Intelligence</li>
+                    <li>Human Computer Interaction</li>
+                    <li>Computer Graphics</li>
+                    <li>Database Management Systems</li>
+                    <li>Distributed Database Systems</li>
+                    <li>Discreet Mathematics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <section class="reviews-section">
+        <h2 id="articles">Reviews from my Teachers</h2>
+
+        <div class="reviews-container">
+            <div class="review-box">
+                <p class="quote">John doe was a brilliant student; always stood out with his assignments.</p>
+                <span class="name">Jane Doe</span>
+                <span class="title">Assistant Professor</span>
+            </div>
+
+            <div class="review-box">
+                <p class="quote">John doe was a brilliant student; always stood out with his assignments.</p>
+                <span class="name">Jane Doe</span>
+                <span class="title">Assistant Professor</span>
+            </div>
+
+            <div class="review-box">
+                <p class="quote">John doe was a brilliant student; always stood out with his assignments.</p>
+                <span class="name">Jane Doe</span>
+                <span class="title">Assistant Professor</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© all rights reserved 2025</p>
+    </footer>
+
+    <script>
+        const dotCursor = document.querySelector('.dot-cursor');
+        const interactiveElements = document.querySelectorAll('a, button, .projects-list li, .main-content, .review-box');
+
+        // Move the custom cursor with the mouse
+        document.addEventListener('mousemove', (e) => {
+            dotCursor.style.left = `${e.clientX}px`;
+            dotCursor.style.top = `${e.clientY}px`;
+        });
+
+        // Add/remove 'hovered' class to cursor when over interactive elements
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                dotCursor.classList.add('hovered');
+            });
+            element.addEventListener('mouseleave', () => {
+                dotCursor.classList.remove('hovered');
+            });
+        });
+    </script>
+
+</body>
+</html>

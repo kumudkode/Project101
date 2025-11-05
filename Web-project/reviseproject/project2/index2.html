@@ -7,6 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         /* Global Reset and Box Model */
+        :root {
+            --primary-color: black;
+            --accent-color: #007bff; /* A nice blue for interaction */
+            --light-gray: #f8f8f8;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -14,6 +20,30 @@
             box-sizing: border-box;
             line-height: 1.5;
             min-width: 900px; /* Ensures three columns don't break too early */
+            background-color: var(--light-gray);
+            cursor: none; /* Hide default cursor */
+            position: relative; /* For the custom cursor */
+        }
+
+        /* ------------------- Custom Cursor (Dot) ------------------- */
+        .dot-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px; /* Size of the dot */
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none; /* Important: allows clicking elements beneath it */
+            z-index: 9999; /* Ensure it's always on top */
+            transform: translate(-50%, -50%); /* Center the dot on the cursor position */
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease; /* Smooth size/color change */
+        }
+
+        .dot-cursor.hovered {
+            width: 24px; /* Larger size on hover */
+            height: 24px;
+            background-color: var(--accent-color); /* Change color on hover */
         }
 
         /* ------------------- Header and Navigation ------------------- */
@@ -39,8 +69,29 @@
 
         nav a {
             text-decoration: none;
-            color: black;
+            color: var(--primary-color);
             font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* ------------------- Main Title ------------------- */
@@ -53,29 +104,39 @@
             font-family: 'Permanent Marker', cursive; /* Applied the custom font */
             font-size: 3.5em;
             margin: 0;
+            animation: fadeInDown 1s ease-out; /* Animation */
         }
 
         .hero-title p {
             font-size: 0.9em;
             color: #666;
             margin-top: 5px;
+            animation: fadeInUp 1s ease-out 0.5s backwards; /* Animation with delay */
+            
         }
 
         /* ------------------- Main 3-Column Section (Flexbox) ------------------- */
         .main-content {
             display: flex;
-            border: 1px solid black; /* Outer border for the whole section */
+            border: 1px solid var(--primary-color); /* Outer border for the whole section */
             margin-top: 30px;
+            box-shadow: 4px 4px 0 0 var(--primary-color); /* Mimic sketch shadow */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .main-content:hover {
+            transform: translate(2px, 2px); /* Slight lift on hover */
         }
 
         .column {
             padding: 20px;
             flex: 1; /* Each column takes equal space */
             min-height: 450px; /* Ensures consistent height */
+            background-color: white; /* Column background */
         }
 
         .column:not(:last-child) {
-            border-right: 1px solid black; /* Vertical dividers */
+            border-right: 1px solid var(--primary-color); /* Vertical dividers */
         }
 
         .column h2 {
@@ -93,14 +154,21 @@
             margin: 0;
         }
         .projects-list li {
-            border: 1px solid black;
+            border: 1px solid var(--primary-color);
             margin-bottom: -1px; /* Overlap borders to look like a single line */
             padding: 10px;
             text-align: center;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
         .projects-list li:first-child { border-top: none; } /* Remove top border of the first item */
         .projects-list li:last-child { border-bottom: none; } /* Remove bottom border of the last item */
         .column:first-child ul li { border-left: none; border-right: none; } /* Remove side borders */
+
+        .projects-list li:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateX(5px);
+        }
 
         /* Work Experience/Education List Styling */
         .work-section, .education-section {
@@ -112,8 +180,30 @@
         }
         .work-section a, .education-section a {
             font-size: 0.9em;
-            color: blue; /* Default link color */
+            color: var(--accent-color); /* Default link color */
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
         }
+
+        .work-section a::after, .education-section a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0%;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .work-section a:hover, .education-section a:hover {
+            color: var(--primary-color);
+        }
+        .work-section a:hover::after, .education-section a:hover::after {
+            width: 100%;
+        }
+
         .education-section ul {
             padding-left: 20px;
             margin-top: 5px;
@@ -141,13 +231,20 @@
 
         .review-box {
             flex: 1;
-            border: 1px solid black;
+            border: 1px solid var(--primary-color);
             border-radius: 10px; /* Rounded corners */
             padding: 20px;
             display: flex;
             flex-direction: column;
             text-align: left;
-            box-shadow: 2px 2px 0 0 black; /* Simple shadow to mimic sketch */
+            background-color: white;
+            box-shadow: 2px 2px 0 0 var(--primary-color); /* Simple shadow to mimic sketch */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .review-box:hover {
+            transform: translate(-3px, -3px); /* Lift and shift */
+            box-shadow: 5px 5px 0 0 var(--accent-color); /* Change shadow color */
         }
 
         .review-box .quote {
@@ -169,7 +266,7 @@
         footer {
             text-align: center;
             padding: 20px 0;
-            border-top: 1px solid black;
+            border-top: 1px solid var(--primary-color);
             margin-top: 20px;
         }
 
@@ -177,13 +274,36 @@
             font-size: 0.8em;
             color: #333;
         }
+
+        /* ------------------- Keyframe Animations ------------------- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header>
+    <div class="dot-cursor"></div> <header>
         <div class="logo">
-            🔥your name
+          🔥your name
         </div>
         <nav>
             <ul>
@@ -278,6 +398,27 @@
     <footer>
         <p>© all rights reserved 2025</p>
     </footer>
+
+    <script>
+        const dotCursor = document.querySelector('.dot-cursor');
+        const interactiveElements = document.querySelectorAll('a, button, .projects-list li, .main-content, .review-box');
+
+        // Move the custom cursor with the mouse
+        document.addEventListener('mousemove', (e) => {
+            dotCursor.style.left = `${e.clientX}px`;
+            dotCursor.style.top = `${e.clientY}px`;
+        });
+
+        // Add/remove 'hovered' class to cursor when over interactive elements
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                dotCursor.classList.add('hovered');
+            });
+            element.addEventListener('mouseleave', () => {
+                dotCursor.classList.remove('hovered');
+            });
+        });
+    </script>
 
 </body>
 </html>
