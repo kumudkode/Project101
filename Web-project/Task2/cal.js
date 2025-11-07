@@ -1,5 +1,5 @@
 let num1= 12
-let num2= 2
+let num2= 22
 document.getElementById("num1-el").textContent = num1
 document.getElementById("num2-el").textContent = num2
 
@@ -16,7 +16,7 @@ let divEl = document.getElementById("div-el")
 let mulEl = document.getElementById("mul-el")
 
 function add() {
-    sumEl.textContent = "Sum: "+ num1 + num2
+    sumEl.textContent = "Sum: "+ (num1 + num2)
 }
 function sub(){
     subEl.textContent = "Sub: "+ (num1 - num2)
@@ -28,5 +28,5 @@ function div(){
     // using math.floor we can round off the value
 }
 function mul(){
-    mulEl.textContent = "Mul: "+num1 * num2
+    mulEl.textContent = "Mul: "+ (num1 * num2)
 }
