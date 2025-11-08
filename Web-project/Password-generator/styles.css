@@ -1,0 +1,17 @@
+.main{
+height: 400px;
+width:400px;
+margin: auto;
+padding: 100px;
+background-color: rgb(31, 31, 72);
+
+}
+span{
+    color: rgb(50, 157, 109);
+}
+button{
+    cursor: pointer;
+    color: white;
+    background-color: rgb(50, 157, 109);
+    border: none;
+}
