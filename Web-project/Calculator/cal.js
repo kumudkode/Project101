@@ -1,7 +1,3 @@
-let num1= 12
-let num2= 22
-document.getElementById("num1-el").textContent = num1
-document.getElementById("num2-el").textContent = num2
 
 // Create four functions: add(), subtract(), divide(), multiply()
 // Call the correct function when the user clicks on one of the buttons
@@ -29,4 +25,14 @@ function div(){
 }
 function mul(){
     mulEl.textContent = "Mul: "+ (num1 * num2)
+}
+function getRandomNumber(){
+    let randomNumber = Math.floor( Math.random() * 6 ) + 1
+    return randomNumber
+}
+function getRandom(){
+    num1= getRandomNumber()
+    num2= getRandomNumber()
+    document.getElementById("num1-el").textContent = num1
+    document.getElementById("num2-el").textContent = num2
 }
