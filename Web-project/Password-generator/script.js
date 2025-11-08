@@ -91,8 +91,17 @@ const characters = [
   "?",
   "/",
 ];
+let password1El = document.getElementById("password1-el");
+let password2El = document.getElementById("password2-el");
 let passwordLength = 15;
-let password = "";
-for (let i = 0; i < passwordLength; i++) {
-  password += characters[Math.floor(Math.random() * characters.length)];
+
+function generate() {
+  let password1 = "";
+  let password2 = "";
+  for (let i = 0; i < passwordLength; i++) {
+    password1 += characters[Math.floor(Math.random() * characters.length)];
+    password2 += characters[Math.floor(Math.random() * characters.length)];
+  }
+  password1El.textContent = password1;
+  password2El.textContent = password2;
 }
