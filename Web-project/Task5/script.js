@@ -9,3 +9,7 @@ let box = document.getElementById("box");
 box.addEventListener("click", function() {
     box.style.backgroundColor = "red";
 })
+
+// function saveLead(){
+//     console.log("Button clicked from function");
+// }
