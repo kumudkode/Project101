@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
+    <div className='face'>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <img src="/image.png" alt="image of movie" width="30%" height="30%" />
+        <h3>Movie Name: Mahavatar Narsimha </h3>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <div>
+        <h2> Rating⭐: 8.6/10 </h2>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          The demon Hiranyakashyap seeks revenge on Vishnu and declares himself a god. His son Prahlad remains devoted to Vishnu. Vishnu manifests as Narsimha to defeat the demon and restore balance.
         </p>
+        <p>Director : <a href="https://www.imdb.com/name/nm16669996/?ref_=tt_ov_1_1">Ashwin Kumar</a></p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <div>
+        <img src="/image.png" alt="image of movie" width="30%" height="30%" />
+        <h3>Movie Name: Mahavatar Narsimha </h3>
+      </div>
+      <div>
+        <h2> Rating⭐: 8.6/10 </h2>
+        <p>
+          The demon Hiranyakashyap seeks revenge on Vishnu and declares himself a god. His son Prahlad remains devoted to Vishnu. Vishnu manifests as Narsimha to defeat the demon and restore balance.
+        </p>
+        <p>Director : <a href="https://www.imdb.com/name/nm16669996/?ref_=tt_ov_1_1">Ashwin Kumar</a></p>
+      </div>
+    </div>
   )
 }
 
