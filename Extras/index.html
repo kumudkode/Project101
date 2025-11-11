@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fan favorites — This week's top TV and movies</title>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel:#0f141b;
+      --muted:#9fb0c3;
+      --text:#e8f0f8;
+      --accent:#4aa8ff;
+      --star:#f7c948;
+      --btn:#16202b;
+      --btnHover:#1d2a38;
+      --chip:#13202a;
+      --shadow: 0 6px 24px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.25);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% -10%, #17314a 0%, transparent 60%) no-repeat, var(--bg);
+    }
+    .wrap{
+      max-width:1200px;
+      margin-inline:auto;
+      padding:28px 18px 60px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      margin-bottom:.25rem;
+    }
+    header h1{
+      font-size: clamp(22px, 2.6vw, 30px);
+      margin:0;
+      letter-spacing:.2px;
+    }
+    header .chev{
+      display:inline-grid; place-items:center;
+      width:28px; height:28px; border-radius:999px;
+      background:#0e1822;
+      border:1px solid #1b2a3a;
+    }
+    .subtitle{
+      color:var(--muted);
+      margin:0 0 14px;
+      font-size:15px;
+    }
+
+    /* Carousel */
+    .scroller{
+      --gap:18px;
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns: clamp(240px, 28vw, 260px);
+      gap:var(--gap);
+      overflow-x:auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type:x mandatory;
+      padding: 6px 4px 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .scroller::-webkit-scrollbar{ height: 10px }
+    .scroller::-webkit-scrollbar-track{ background:#0e1620; border-radius:999px }
+    .scroller::-webkit-scrollbar-thumb{ background:#253648; border-radius:999px }
+
+    .card{
+      background:linear-gradient(180deg, #141e29, #0e1620);
+      border:1px solid #1a2a3a;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      scroll-snap-align:start;
+      display:flex;
+      flex-direction:column;
+      min-height: 480px;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:focus-within, .card:hover{
+      transform: translateY(-2px);
+      border-color:#274966;
+      box-shadow: 0 10px 28px rgba(0,0,0,.45), 0 3px 14px rgba(0,0,0,.35);
+    }
+
+    .poster{
+      position:relative;
+      aspect-ratio: 2/3;
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+      overflow:hidden;
+      background:#0a0f15;
+    }
+    .poster img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .badge{
+      position:absolute; top:10px; left:10px;
+      background: #0f1923cc;
+      border:1px solid #223347;
+      padding:6px 10px;
+      border-radius: 12px;
+      display:flex; align-items:center; gap:6px;
+      font-weight:600;
+    }
+    .badge svg{ width:16px; height:16px; fill:var(--star) }
+    .pin{
+      position:absolute; top:10px; right:10px;
+      background:#0f1923cc; border:1px solid #223347;
+      width:36px; height:36px; border-radius:10px;
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .pin[aria-pressed="true"]{ outline:2px solid var(--accent) }
+
+    .body{
+      display:flex; flex-direction:column; gap:10px;
+      padding:14px 14px 16px;
+      flex:1;
+    }
+    .title{
+      font-size: 18px;
+      margin:0;
+    }
+    .meta{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:-4px;
+    }
+
+    .actions{
+      margin-top:auto;
+      display:grid; gap:10px;
+    }
+    .btn{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      background: var(--btn);
+      border:1px solid #223347;
+      padding:12px 14px;
+      border-radius: 14px;
+      cursor:pointer;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:600;
+      transition: background .15s ease, border-color .15s ease, transform .08s ease;
+    }
+    .btn:active{ transform: translateY(1px) }
+    .btn:hover, .btn:focus-visible{ background:var(--btnHover); border-color:#2c445b; outline:none }
+    .btn svg{ width:18px; height:18px; flex:0 0 auto; }
+    .btn.primary{ background:#0f1e2b; border-color:#234667 }
+    .btn.primary:hover{ background:#11283a }
+
+    /* Floating arrows for mouse users on wide screens */
+    .nav{
+      position:relative;
+      height:0;
+    }
+    .arrow{
+      position:absolute; z-index:2; top:-220px;
+      width:44px; height:44px; border-radius:12px;
+      border:1px solid #24374a; background:#0c151fdd;
+      display:none; place-items:center; cursor:pointer;
+      box-shadow: var(--shadow);
+    }
+    .arrow svg{ width:22px; height:22px }
+    .arrow.left{ left:-6px }
+    .arrow.right{ right:-6px }
+    @media (min-width: 1100px){
+      .arrow{ display:grid }
+    }
+
+    /* Accessibility helpers */
+    .sr-only{
+      position:absolute !important;
+      width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+      clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="#" class="sr-only">Back to top</a>
+    <header>
+      <div class="chev" aria-hidden="true">
+        <!-- back chevron -->
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"></path>
+        </svg>
+      </div>
+      <h1>Fan favorites</h1>
+    </header>
+    <p class="subtitle">This week's top TV and movies</p>
+
+    <div class="nav" aria-hidden="true">
+      <button class="arrow left" id="leftBtn" title="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="arrow right" id="rightBtn" title="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <section class="scroller" id="scroller" aria-label="Fan favorites carousel">
+      <!-- Cards will be injected by JS -->
+    </section>
+  </div>
+
+  <template id="cardTpl">
+    <article class="card">
+      <div class="poster">
+        <img alt="">
+        <div class="badge" aria-label="rating">
+          <!-- star -->
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <span class="score"></span>
+        </div>
+        <button class="pin" title="Add to Watchlist" aria-pressed="false">
+          <!-- plus -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="body">
+        <h3 class="title"></h3>
+        <p class="meta"></p>
+        <div class="actions">
+          <a class="btn" data-action="watch" href="#" role="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            Watch options
+          </a>
+          <a class="btn primary" data-action="trailer" href="#" role="button">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Trailer
+          </a>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    // --- Data (replace poster URLs with your own if you want) ---
+    const movies = [
+      {
+        title: "Kantara A Legend: Chapter 1",
+        rating: 8.4,
+        sub: "Chapter 1",
+        poster: "https://media-cache.cinematerial.com/p/500x/fc5l9mx4/kantara-2-indian-movie-poster.jpg?v=1751876601" // placeholder
+      },
+      {
+        title: "Lokah Chapter One: Chandra",
+        rating: 7.8,
+        sub: "Chandra",
+        poster: "https://m.media-amazon.com/images/M/MV5BZThiYjY3ODUtOGM4Yy00OGE0LTliM2UtYjFlNDY0Mzg3OWJlXkEyXkFqcGc@._V1_.jpg"
+      },
+      {
+        title: "The Great Pre-Wedding Show",
+        rating: 8.9,
+        sub: "Show",
+        poster: "https://m.media-amazon.com/images/M/MV5BMjIxYjYwNmQtM2I5Zi00ODViLTgxZTYtY2IxNTM3NDRmMmUzXkEyXkFqcGc@._V1_.jpg"
+      },
+      {
+        title: "Frankenstein",
+        rating: 7.6,
+        sub: "",
+        poster: "https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        title: "Predator: Badlands",
+        rating: 7.6,
+        sub: "",
+        poster: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        title: "The Fantastic Four: First Steps",
+        rating: 7.0,
+        sub: "First Steps",
+        poster: "https://images.unsplash.com/photo-1542178243-bc20204b769f?q=80&w=800&auto=format&fit=crop"
+      }
+    ];
+
+    // --- Utilities ---
+    const $ = (sel, root=document) => root.querySelector(sel);
+
+    // Create cards
+    const scroller = $('#scroller');
+    const tpl = $('#cardTpl');
+
+    movies.forEach(m => {
+      const node = tpl.content.firstElementChild.cloneNode(true);
+
+      const img = $('img', node);
+      img.src = m.poster;
+      img.alt = `${m.title} poster`;
+
+      $('.score', node).textContent = m.rating.toFixed(1);
+      $('.title', node).textContent = m.title;
+      $('.meta', node).textContent = m.sub || '';
+
+      // Watchlist toggle
+      const pin = $('.pin', node);
+      pin.addEventListener('click', () => {
+        const pressed = pin.getAttribute('aria-pressed') === 'true';
+        pin.setAttribute('aria-pressed', String(!pressed));
+        pin.title = pressed ? 'Add to Watchlist' : 'In Watchlist';
+      });
+
+      // Buttons
+      $('[data-action="watch"]', node).addEventListener('click', (e)=>{
+        e.preventDefault();
+        alert(`Show providers for:\n${m.title}`);
+      });
+      $('[data-action="trailer"]', node).addEventListener('click', (e)=>{
+        e.preventDefault();
+        alert(`Play trailer:\n${m.title}`);
+      });
+
+      scroller.appendChild(node);
+    });
+
+    // --- Mouse/keyboard navigation helpers ---
+    const byCard = () => {
+      const card = scroller.firstElementChild;
+      return card ? (card.getBoundingClientRect().width + parseFloat(getComputedStyle(scroller).gap || 18)) : 260;
+    };
+    $('#leftBtn').addEventListener('click', ()=> scroller.scrollBy({left: -byCard()*1.2, behavior:'smooth'}));
+    $('#rightBtn').addEventListener('click', ()=> scroller.scrollBy({left: byCard()*1.2, behavior:'smooth'}));
+
+    // Drag/Swipe to scroll (desktop)
+    let isDown=false, startX, scrollLeft;
+    scroller.addEventListener('mousedown', (e)=>{
+      isDown=true; startX=e.pageX - scroller.offsetLeft; scrollLeft=scroller.scrollLeft; scroller.style.cursor='grabbing';
+    });
+    window.addEventListener('mouseup', ()=>{ isDown=false; scroller.style.cursor='auto'; });
+    scroller.addEventListener('mouseleave', ()=>{ isDown=false; scroller.style.cursor='auto'; });
+    scroller.addEventListener('mousemove', (e)=>{
+      if(!isDown) return;
+      const x=e.pageX - scroller.offsetLeft;
+      const walk=(x - startX)*1.2;
+      scroller.scrollLeft= scrollLeft - walk;
+    });
+
+    // Keyboard support
+    scroller.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){ e.preventDefault(); scroller.scrollBy({left: byCard(), behavior:'smooth'}); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); scroller.scrollBy({left: -byCard(), behavior:'smooth'}); }
+    });
+  </script>
+</body>
+</html>

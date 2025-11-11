@@ -1,0 +1,120 @@
+:root{
+  --bg:#0b0f14; --panel:#0f141b; --muted:#9fb0c3; --text:#e8f0f8;
+  --accent:#4aa8ff; --star:#f7c948; --btn:#16202b; --btnHover:#1d2a38;
+  --radius:18px;
+}
+
+/* Card */
+.card{
+  position:relative; background:linear-gradient(180deg,#14202b,#0f1620);
+  border:1px solid #1a2a3a; border-radius:var(--radius); min-height:460px;
+  display:flex;flex-direction:column; scroll-snap-align:start;
+  transform:translateY(8px); opacity:0;
+  transition:transform .35s ease, box-shadow .28s ease, border-color .25s ease, opacity .35s ease;
+  overflow:hidden;
+}
+.card::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient( to bottom right, rgba(90,160,255,.18), rgba(255,255,255,0) 30% );
+  opacity:0; transition:opacity .25s ease;
+  mix-blend-mode:overlay;
+}
+.card.in{opacity:1; transform:translateY(0)}
+.card:hover, .card:focus-within{border-color:#274966; box-shadow:0 12px 34px rgba(0,0,0,.46)}
+.card:hover::before, .card:focus-within::before{opacity:.5}
+
+.poster{position:relative; aspect-ratio:2/3; overflow:hidden; border-radius:var(--radius) var(--radius) 0 0; background:#0a0f15}
+.poster img{
+  width:100%;height:100%;object-fit:cover; display:block;
+  filter: grayscale(.65) brightness(.72) saturate(.85) contrast(.9);
+  transform:scale(1);
+  transition: filter .45s ease, transform .45s ease;
+}
+.card:hover .poster img,
+.card:focus-within .poster img{
+  filter:none; transform:scale(1.018);
+}
+.poster::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,0) 30%, rgba(0,0,0,.24) 100%);
+  transition:opacity .35s ease; opacity:.9;
+}
+.card:hover .poster::after, .card:focus-within .poster::after{opacity:.6}
+
+.badge{
+  position:absolute; top:10px; left:10px;
+  background:#0f1923cc; border:1px solid #223347; padding:6px 10px; border-radius:12px;
+  display:flex;align-items:center;gap:6px;font-weight:700;
+  animation:badgeIn .6s ease both;
+}
+.badge svg{width:16px;height:16px;fill:var(--star)}
+@keyframes badgeIn{ from{transform:translateY(-6px);opacity:0} to{transform:none;opacity:1}}
+
+/* Watchlist (+) micro-interaction */
+.pin{
+  position:absolute; top:10px; right:10px; width:34px; height:34px;
+  display:grid; place-items:center; cursor:pointer; border-radius:10px;
+  background:#0f1923cc; border:1px solid #223347;
+  transition: background .2s ease, border-color .2s ease, transform .18s ease;
+  overflow:visible;
+}
+.pin:hover{background:#142030}
+.pin[aria-pressed="true"]{outline:2px solid #2e6ea5; border-color:#2e6ea5}
+.pin svg{width:18px;height:18px}
+.pin .plus{ transform-origin:50% 50%; transition:transform .25s ease, opacity .2s ease }
+.pin[aria-pressed="true"] .plus{ transform:rotate(90deg) scale(.8); opacity:0 }
+.pin .check{
+  position:absolute; inset:0; margin:auto; width:20px; height:20px; display:block;
+  stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:22; stroke-dashoffset:22; opacity:0;
+}
+.pin[aria-pressed="true"] .check{
+  animation:draw .45s ease forwards .05s;
+}
+@keyframes draw{to{stroke-dashoffset:0; opacity:1}}
+
+/* ring ripple on toggle */
+.pin::after{
+  content:""; position:absolute; inset:0; border-radius:12px; border:2px solid rgba(74,168,255,.35);
+  opacity:0; transform:scale(.8);
+}
+.pin[aria-pressed="true"]::after{
+  animation:ring .45s ease-out forwards;
+}
+@keyframes ring{ to{opacity:0; transform:scale(1.35)} }
+
+.body{display:flex;flex-direction:column;gap:8px;padding:12px 12px 14px;flex:1}
+.title{font-size:17px;margin:0}
+.meta{color:var(--muted);font-size:14px;margin-top:-2px}
+
+/* Buttons */
+.actions{margin-top:auto; display:grid; gap:8px}
+.btn{
+  position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--btn); border:1px solid #223347; padding:11px 12px;
+  border-radius:12px; cursor:pointer; color:var(--text); text-decoration:none; font-weight:650;
+  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+}
+.btn:hover{background:var(--btnHover); border-color:#2c445b}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:#0f1e2b; border-color:#234667}
+.btn.primary:hover{background:#11283a}
+.btn svg{width:18px;height:18px}
+
+/* subtle sheen on hover */
+.btn::before{
+  content:""; position:absolute; inset:0; background:
+    linear-gradient(110deg, transparent 0%, rgba(255,255,255,.06) 15%, transparent 30%);
+  transform:translateX(-120%); transition:transform .5s ease;
+}
+.btn:hover::before{ transform:translateX(120%) }
+
+/* soft ripple */
+.ripple{position:absolute;border-radius:50%;transform:scale(0);animation:ripple .5s linear;background:rgba(255,255,255,.14)}
+@keyframes ripple{to{transform:scale(8);opacity:0}}
+
+/* motion safety */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important; transition:none!important}
+}

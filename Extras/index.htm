@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fan favorites — Animated</title>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#0f141b; --muted:#9fb0c3; --text:#e8f0f8;
+    --accent:#4aa8ff; --star:#f7c948; --btn:#16202b; --btnHover:#1d2a38;
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:var(--text);
+    background: radial-gradient(1200px 600px at 20% -10%, #17314a 0%, transparent 60%) no-repeat, var(--bg);
+    font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  }
+  .wrap{max-width:1200px;margin:auto;padding:28px 18px 60px}
+  header{display:flex;align-items:center;gap:.6rem}
+  header h1{font-size:clamp(22px,2.6vw,30px);margin:0}
+  header .chev{display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:#0e1822;border:1px solid #1b2a3a}
+  .subtitle{color:var(--muted);margin:.4rem 0 10px}
+
+  /* Carousel */
+  .scroller{
+    --gap:18px;
+    display:grid;grid-auto-flow:column;grid-auto-columns:clamp(240px,28vw,260px);
+    gap:var(--gap);overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+    padding:6px 4px 10px; -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
+  }
+  .scroller::-webkit-scrollbar{height:10px}
+  .scroller::-webkit-scrollbar-thumb{background:#253648;border-radius:999px}
+  .scroller:active{cursor:grabbing}
+
+  /* Cards */
+  .card{
+    position:relative; background:linear-gradient(180deg,#141e29,#0e1620);
+    border:1px solid #1a2a3a; border-radius:var(--radius); min-height:480px;
+    display:flex;flex-direction:column; scroll-snap-align:start;
+    transform:translateY(14px) scale(.985);
+    opacity:0; filter:saturate(.92);
+    transition:transform .35s cubic-bezier(.2,.65,.2,1), box-shadow .25s, border-color .25s, filter .25s;
+    will-change:transform, box-shadow, filter;
+  }
+  .card.in{opacity:1; transform:translateY(0) scale(1)}
+  .card:hover, .card:focus-within{border-color:#274966; box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .card:hover{filter:saturate(1)}
+  .card::after{ /* glow */
+    content:""; position:absolute; inset:-2px; border-radius:calc(var(--radius) + 2px);
+    background:radial-gradient(120px 80px at var(--mx,50%) var(--my,30%), rgba(74,168,255,.28), transparent 60%);
+    opacity:0; transition:opacity .25s;
+    pointer-events:none;
+  }
+  .card:hover::after{opacity:1}
+
+  .poster{position:relative; aspect-ratio:2/3; overflow:hidden; border-radius:var(--radius) var(--radius) 0 0; background:#0a0f15}
+  .poster img{width:100%;height:100%;object-fit:cover; transform:scale(1); transition:transform .5s cubic-bezier(.2,.65,.2,1)}
+  .card:hover .poster img{transform:scale(1.06)}
+  .badge{position:absolute; top:10px; left:10px; background:#0f1923cc; border:1px solid #223347; padding:6px 10px; border-radius:12px; display:flex;align-items:center;gap:6px;font-weight:700}
+  .badge svg{width:16px;height:16px;fill:var(--star)}
+  .card:hover .badge{animation:scorePulse .9s ease}
+  @keyframes scorePulse{0%{transform:scale(1)}25%{transform:scale(1.07)}100%{transform:scale(1)}}
+
+  .pin{
+    position:absolute; top:10px; right:10px; width:36px; height:36px;
+    display:grid; place-items:center; cursor:pointer; border-radius:10px;
+    background:#0f1923cc; border:1px solid #223347; transition:transform .2s, border-color .2s;
+  }
+  .pin:hover{transform:scale(1.05)}
+  .pin[aria-pressed="true"]{outline:2px solid var(--accent); border-color:#2d6ea1}
+
+  .confetti{
+    position:absolute; inset:0; pointer-events:none; overflow:visible;
+  }
+
+  .body{display:flex;flex-direction:column;gap:10px;padding:14px 14px 16px;flex:1}
+  .title{font-size:18px;margin:0}
+  .meta{color:var(--muted);font-size:14px;margin-top:-4px}
+
+  .actions{margin-top:auto; display:grid; gap:10px}
+  .btn{
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    background:var(--btn); border:1px solid #223347; padding:12px 14px;
+    border-radius:14px; cursor:pointer; color:var(--text); text-decoration:none; font-weight:700;
+    transition:transform .08s, background .15s, border-color .15s;
+  }
+  .btn:hover{background:var(--btnHover); border-color:#2c445b}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:#0f1e2b; border-color:#234667}
+  .btn.primary:hover{background:#11283a}
+  .btn svg{width:18px;height:18px}
+
+  /* button ripple */
+  .ripple{position:absolute; border-radius:50%; transform:scale(0); animation:ripple .6s linear; background:rgba(255,255,255,.25)}
+  @keyframes ripple{to{transform:scale(12); opacity:0}}
+
+  /* 3D tilt */
+  .tilt{transform-style:preserve-3d}
+  .tilt .poster img{transform:translateZ(20px) scale(1)}
+  .tilt:hover{transform:rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(0) scale(1.01)}
+
+  /* arrows */
+  .nav{position:relative;height:0}
+  .arrow{position:absolute; z-index:2; top:-220px; width:44px;height:44px;border-radius:12px;border:1px solid #24374a;background:#0c151fdd;display:none;place-items:center;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+  .arrow.left{left:-6px} .arrow.right{right:-6px}
+  .arrow:hover{animation:wiggle .6s ease}
+  @keyframes wiggle{0%{transform:translateX(0)}30%{transform:translateX(-2px)}60%{transform:translateX(3px)}100%{transform:translateX(0)}}
+  @media (min-width:1100px){.arrow{display:grid}}
+
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="#" class="sr-only">Back to top</a>
+    <header>
+      <div class="chev" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </div>
+      <h1>Fan favorites</h1>
+    </header>
+    <p class="subtitle">This week's top TV and movies</p>
+
+    <div class="nav" aria-hidden="true">
+      <button class="arrow left" id="leftBtn" title="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="arrow right" id="rightBtn" title="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <section class="scroller" id="scroller" aria-label="Fan favorites carousel"></section>
+  </div>
+
+  <template id="cardTpl">
+    <article class="card tilt">
+      <div class="poster">
+        <img alt="">
+        <svg class="confetti" viewBox="0 0 100 150" preserveAspectRatio="none"></svg>
+        <div class="badge" aria-label="rating">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <span class="score"></span>
+        </div>
+        <button class="pin" title="Add to Watchlist" aria-pressed="false">
+          <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;inset:0;margin:auto;display:none"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
+      <div class="body">
+        <h3 class="title"></h3>
+        <p class="meta"></p>
+        <div class="actions">
+          <a class="btn" data-action="watch" href="#" role="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            Watch options
+          </a>
+          <a class="btn primary" data-action="trailer" href="#" role="button">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            Trailer
+          </a>
+        </div>
+      </div>
+    </article>
+  </template>
+
+<script>
+  const movies = [
+    { title:"Kantara A Legend: Chapter 1", rating:8.4, sub:"Chapter 1", poster:"https://media-cache.cinematerial.com/p/500x/fc5l9mx4/kantara-2-indian-movie-poster.jpg?v=1751876601" },
+    { title:"Lokah Chapter One: Chandra", rating:7.8, sub:"Chandra", poster:"https://m.media-amazon.com/images/M/MV5BZThiYjY3ODUtOGM4Yy00OGE0LTliM2UtYjFlNDY0Mzg3OWJlXkEyXkFqcGc@._V1_.jpg" },
+    { title:"The Great Pre-Wedding Show", rating:8.9, sub:"Show", poster:"https://m.media-amazon.com/images/M/MV5BMjIxYjYwNmQtM2I5Zi00ODViLTgxZTYtY2IxNTM3NDRmMmUzXkEyXkFqcGc@._V1_.jpg" },
+    { title:"Frankenstein", rating:7.6, sub:"", poster:"https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=800&auto=format&fit=crop" },
+    { title:"Predator: Badlands", rating:7.6, sub:"", poster:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop" },
+    { title:"The Fantastic Four: First Steps", rating:7.0, sub:"First Steps", poster:"https://images.unsplash.com/photo-1542178243-bc20204b769f?q=80&w=800&auto=format&fit=crop" },
+  ];
+
+  const scroller = document.getElementById('scroller');
+  const tpl = document.getElementById('cardTpl');
+
+  // Build cards
+  movies.forEach((m, i) => {
+    const node = tpl.content.firstElementChild.cloneNode(true);
+    const img = node.querySelector('img');
+    img.src = m.poster; img.alt = `${m.title} poster`;
+    node.querySelector('.score').textContent = m.rating.toFixed(1);
+    node.querySelector('.title').textContent = m.title;
+    node.querySelector('.meta').textContent = m.sub || '';
+
+    // Watchlist button micro-interaction
+    const pin = node.querySelector('.pin');
+    const plus = node.querySelector('.icon-plus');
+    const check = node.querySelector('.icon-check');
+    const confetti = node.querySelector('.confetti');
+
+    pin.addEventListener('click', (e) => {
+      const pressed = pin.getAttribute('aria-pressed') === 'true';
+      pin.setAttribute('aria-pressed', String(!pressed));
+      if (!pressed) {
+        // icon swap
+        plus.style.display = 'none';
+        check.style.display = 'block';
+        pin.title = 'In Watchlist';
+        burst(confetti);
+      } else {
+        plus.style.display = 'block';
+        check.style.display = 'none';
+        pin.title = 'Add to Watchlist';
+        confetti.innerHTML = '';
+      }
+    });
+
+    // Buttons: ripple
+    node.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const r = document.createElement('span');
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        r.className = 'ripple';
+        r.style.width = r.style.height = size + 'px';
+        r.style.left = (e.clientX - rect.left - size/2) + 'px';
+        r.style.top  = (e.clientY - rect.top  - size/2) + 'px';
+        btn.appendChild(r);
+        setTimeout(()=>r.remove(), 650);
+        // Demo
+        if (btn.dataset.action === 'watch') alert(`Show providers for:\n${m.title}`);
+        if (btn.dataset.action === 'trailer') alert(`Play trailer:\n${m.title}`);
+      });
+    });
+
+    // Tilt (mouse move)
+    node.addEventListener('mousemove', (e)=>{
+      const r = node.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const ry = (x - .5) * 10; // rotateY
+      const rx = (y - .5) * -8; // rotateX
+      node.style.setProperty('--ry', ry + 'deg');
+      node.style.setProperty('--rx', rx + 'deg');
+      node.style.setProperty('--mx', (x*100)+'%');
+      node.style.setProperty('--my', (y*100)+'%');
+    });
+    node.addEventListener('mouseleave', ()=> {
+      node.style.removeProperty('--ry'); node.style.removeProperty('--rx');
+      node.style.setProperty('--mx','50%'); node.style.setProperty('--my','30%');
+    });
+
+    // Stagger attribute (for observer)
+    node.style.transitionDelay = (i * 70) + 'ms';
+    scroller.appendChild(node);
+  });
+
+  // IntersectionObserver for enter animation
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(ent => { if (ent.isIntersecting) ent.target.classList.add('in'); });
+  }, {root: scroller, threshold: .2});
+  [...scroller.children].forEach(c => io.observe(c));
+
+  // Scroll arrows
+  const byCard = () => {
+    const card = scroller.firstElementChild;
+    if (!card) return 260;
+    const styles = getComputedStyle(scroller);
+    const gap = parseFloat(styles.gap) || 18;
+    return card.getBoundingClientRect().width + gap;
+  };
+  document.getElementById('leftBtn').addEventListener('click', ()=> scroller.scrollBy({left:-byCard()*1.2, behavior:'smooth'}));
+  document.getElementById('rightBtn').addEventListener('click', ()=> scroller.scrollBy({left: byCard()*1.2, behavior:'smooth'}));
+
+  // Confetti burst (SVG tiny particles)
+  function burst(svg){
+    svg.innerHTML = '';
+    const N = 16;
+    for(let i=0;i<N;i++){
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx','50'); c.setAttribute('cy','20'); c.setAttribute('r',Math.random()*1.8+0.8);
+      c.setAttribute('fill',['#4aa8ff','#f7c948','#7bffb0','#ff89c6'][i%4]);
+      svg.appendChild(c);
+      const dx = (Math.random()*2-1) * 40;
+      const dy = - (10 + Math.random()*35);
+      const t  = 600 + Math.random()*500;
+      c.animate([
+        { transform:`translate(0,0)`, opacity:1 },
+        { transform:`translate(${dx}px, ${dy}px)`, opacity:0 }
+      ], { duration:t, easing:'cubic-bezier(.2,.65,.2,1)', fill:'forwards' });
+    }
+  }
+</script>
+</body>
+</html>
