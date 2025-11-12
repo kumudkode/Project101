@@ -1,72 +1,255 @@
-.root{
-    height:583px;
-    width:227px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto 10px;
-    padding: 0px;
-    border: 2px solid rgb(255, 255, 255);
-    background-color: #1d2a38;
-    color: white;
-
-    
-}
-img{
-    height: 300px;
-    width: 100;
-    border-radius: 10px;
-    margin: 0 auto;
-}
-.tab{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border: 2px solid rgb(255, 255, 255);
-}
-body{
-background-color: #253648;;
- font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-color:#e8f0f8;
-border-radius: 999px;
-height: 1486px;
-width: 824px;
-margin: auto;
-padding: 28px 18px 68px;
-
-}
-button{
- background-color: #16202b;
-   color: #E8F0f8;
-   font-size: 25px;
-   height: 80px;
-   width: 250px;
-   margin: 10px;
-   border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  justify-content:space-around;
-  align-items: center;
-  padding: 1.5rem 2.5rem;
-  box-sizing: border-box;
-
-}
-
-svg{
-    height:50px;
-    width:50px;
-}
-h3{
-    font-size: 1.3rem;
+/* --- Global Body & Layout --- */
+body {
+    background-color: #0d1218; 
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: #e8f0f8;
     margin: 0;
-
-   
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    box-sizing: border-box;
+    min-height: 100vh; 
 }
-p{
-    font-size: 1.2rem;
+
+/* --- Header Section (Fan Favorites) --- */
+.header-section { 
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    align-self: flex-start; 
+}
+
+h1 { /* Targeting the h1 for the header section */
+    font-size: 1.8rem;
+    color: #e8f0f8;
+    margin: 0;
+    font-weight: 500;
+}
+
+.header-section p { /* Targeting the p for the header section */
+    font-size: 1rem;
     color: #9fb0c3;
+    margin: 5px 0 0;
 }
 
+.back-arrow {
+    color: #00a8e1; 
+    font-size: 1.5rem; 
+    cursor: pointer;
+    line-height: 1; 
+    font-weight: bold;
+}
+
+/* --- Horizontal Scrolling Container --- */
+.tab { /* This is your .movie-list-container from previous examples */
+    display: flex;          
+    overflow-x: auto;       
+    overflow-y: hidden;     
+    padding: 10px 0; 
+    gap: 20px;              
+    width: 100%;
+    max-width: 1200px; 
+    -webkit-overflow-scrolling: touch; 
+    align-self: center; 
+    scrollbar-width: thin; 
+    scrollbar-color: #4a5b6c #1a232b; 
+}
+
+.tab::-webkit-scrollbar {
+    height: 8px; 
+}
+
+.tab::-webkit-scrollbar-track {
+    background: #1a232b; 
+    border-radius: 10px;
+}
+
+.tab::-webkit-scrollbar-thumb {
+    background-color: #4a5b6c; 
+    border-radius: 10px;
+    border: 2px solid #1a232b; 
+}
+
+/* --- Movie Card Container (.root) --- */
+.root {
+    flex-shrink: 0;         
+    width: 240px; /* Increased width to match Image 2's larger size */
+    height: 520px; /* Increased height to match Image 2's larger size */
+    background-color: #1a232b; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    color: white;
+    box-sizing: border-box;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; 
+    cursor: pointer; 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+.root:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); 
+}
+
+/* --- Image and Overlays --- */
+.poster-container {
+    position: relative;
+    width: 100%;
+    height: 360px; /* Adjusted height relative to new card size */
+    overflow: hidden; 
+    border-radius: 8px 8px 0 0; 
+}
+
+.poster-container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; 
+    border-radius: 8px 8px 0 0;
+    transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added filter transition */
+    
+    /* DEFAULT: Desaturated/Darkened appearance */
+    filter: brightness(0.6) grayscale(70%); /* Darker and more desaturated */
+}
+
+.root:hover .poster-container img {
+    transform: scale(1.03); 
+    filter: brightness(1) grayscale(0%); /* FULL COLOR and normal brightness on hover */
+}
+
+.star-rating {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /* Background matches image 2 more closely */
+    background-color: rgba(30, 30, 30, 0.85); 
+    padding: 4px 8px; /* Slightly more padding */
+    border-radius: 4px; 
+    font-size: 0.9rem; 
+    color: #ffd700; 
+    display: flex;
+    align-items: center;
+    gap: 4px; 
+    font-weight: 600;
+}
+
+.star-rating::before {
+    content: '\2605'; 
+    color: #ffd700;
+    font-size: 0.8em;
+    margin-right: 2px;
+}
+
+.add-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: white;
+    width: 28px; 
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s;
+}
+
+.add-button:hover {
+    background-color: #00a8e1; 
+    transform: scale(1.1); 
+}
+
+/* --- Info Section --- */
+.info-section {
+    padding: 10px 15px; 
+    text-align: left; 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    font-size: 1.1rem; 
+    color: #e8f0f8;
+    margin: 5px 0 2px; 
+    font-weight: 600; 
+    line-height: 1.3;
+}
+
+.info-section > p { 
+    font-size: 0.85rem; 
+    color: #9fb0c3;
+    margin: 0 0 15px; 
+    font-weight: 300;
+}
+
+/* --- Button Group --- */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+    margin-top: auto; 
+    width: 100%; 
+}
+
+/* Shared button styles */
+button {
+    background-color: transparent; 
+    color: white; 
+    font-size: 0.95rem; 
+    font-weight: 600;
+    height: 40px; 
+    width: 100%;
+    border-radius: 5px; 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button svg {
+    height: 16px; 
+    width: 16px;
+    margin-right: 8px;
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+/* 1. Watch Options Button (Lined/Outline style) */
+.watchlist-button {
+    background-color: #1a232b; /* Card background color */
+    color: #00a8e1; /* Blue text */
+    border: 1px solid #00a8e1; /* Blue outline */
+}
+
+.watchlist-button:hover {
+    background-color: #00a8e1; 
+    color: white;
+    transform: scale(1.02);
+}
+
+/* 2. Trailer Button (Filled Blue style) */
+.trailer-button {
+    background-color: #00a8e1; 
+    color: white;
+    border: 1px solid #00a8e1; 
+}
+
+.trailer-button:hover {
+    background-color: #008cd4; 
+    border-color: #008cd4;
+    transform: scale(1.02);
+}

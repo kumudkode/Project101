@@ -1,19 +1,57 @@
+// MovieTab.jsx - REVISED
 import Movie from "./Movie.jsx"
 import './Movie.css'
 
 function MovieTab(){
     return(
-        
-        <div className="tab">
-        <Movie title="Kantara A Legend: Chapter 1" star="8.4"/>
-        <Movie title="Lokah Chapter One: Chandra" star="7.8" />
-        <Movie title="The Great Pre-Wedding Show" star="8.9" />
-        <Movie title="Frankenstein" star="7.6"/>
-        <Movie title="Predator: Badlands" star="7.6"/>
-        <Movie title="The Fantastic Four: First Steps" star="7.0" />
-        
-       </div>
+        <>
+            <div className="header-section">
+                <span className="back-arrow">&lt;</span> 
+                <div>
+                    <h1>Fan Favorites</h1>
+                    <p>This week's top TV and movies</p>
+                </div>
+            </div>
 
+            <div className="tab">
+                <Movie 
+                    title="Kantara A Legend: Chapter 1" 
+                    star="8.4" 
+                    imageUrl="/images/kantara.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Chapter 1" // Example description
+                />
+                <Movie 
+                    title="Lokah Chapter One: Chandra" 
+                    star="7.8" 
+                    imageUrl="/images/lokah.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Chandra" // Example description
+                />
+                <Movie 
+                    title="The Great Pre-Wedding Show" 
+                    star="8.9" 
+                    imageUrl="/images/pre-wedding-show.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Show" // Example description
+                />
+                <Movie 
+                    title="Frankenstein" 
+                    star="7.6" 
+                    imageUrl="/images/frankenstein.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Movie cast" // Example description
+                />
+                <Movie 
+                    title="Predator: Badlands" 
+                    star="7.6" 
+                    imageUrl="/images/predator.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Movie cast" // Example description
+                />
+                <Movie 
+                    title="The Fantastic Four: First Steps" 
+                    star="7.0" 
+                    imageUrl="/images/fantastic-four.jpg" // REPLACE WITH ACTUAL PATH
+                    description="Movie cast" // Example description
+                />
+            </div>
+        </>
     )
 }
 
