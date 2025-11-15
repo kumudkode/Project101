@@ -1,37 +1,21 @@
-import LikeButton from "./LikeButton";
-import "./App.css"
-
-function Car({brand}) {
-  return (
-    <>
-    <h2>I am a Car!</h2>
-    <h3>{brand}</h3>
-    </>
-  );
-}
-
-// dry run
-
-// app --> garage --> brand bmw pass to function --> then h2 print then h3 then --> brand audi pass to function --> then h2 print then h3 then
-
-function Garage() {
-  return (
-    <>
-      <h1>Rendering a Component Twice</h1>
-      <Car brand = "bmw"/>
-      <Car brand = "audi" />
-    </>
-  );
-}
-
-
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./Layout"
+import Home from "./pages/Home"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
 
 function App() {
-  return(
-    <>
-    <Garage />
-    <LikeButton />
-    </>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
+
 export default App
