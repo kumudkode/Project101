@@ -53,3 +53,37 @@ run these commands
 > lets run new features
 - Math.round(2.8)
 -- ans: 3
+
+```
+just cover these topics
+![alt text](image-7.png)
+
+> question for solve
+![alt text](image-8.png)
+-----------------
+Q1.
+-----------------
+1 soup for $10 
+3 burger for $8
+1 ice-cream for $5
+- 10 + 3*8 + 5 = $39
+--------------
+Q2.
+--------------
+(10+3*8+5)/3 = $13
+---------------
+Q3.
+---------------
+18.50 + (2 * 7.50)
+----------------
+Q4.
+----------------
+18.50 + (2 * 7.50) / 
+----------------
+
+```
+> 3 ways to create string
+![alt text](image-9.png)
+![use escape character](image-10.png)
+![alt text](image-11.png)
+
