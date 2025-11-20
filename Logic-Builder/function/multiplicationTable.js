@@ -5,7 +5,7 @@ for(let i =1;i<=10;i++){
 }
 
 }
-multi(2)
+// multi(2)
 
 // output
 // 2 * 1 = 2
@@ -18,3 +18,11 @@ multi(2)
 // 2 * 8 = 16
 // 2 * 9 = 18
 // 2 * 10 = 20
+
+// or we can do this
+function printTable(n){
+    for(let i = n;i<=n*10;i+=n){
+        console.log(i);
+    }
+}
+printTable(5)

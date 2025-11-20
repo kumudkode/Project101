@@ -14,3 +14,15 @@ for(let i = 0;i<=m;i++){
 return sum
 }
 console.log(getSum(3))
+
+//or we can use return direct value of function
+function isAdult(age){
+if(age>=18){
+    return "adult";
+}
+else
+{
+    return "not adult";
+}
+}
+console.log(isAdult(23))
