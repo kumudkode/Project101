@@ -39,7 +39,7 @@ function scope(){
     function scope2(){ // lexical scope
         let b = 20
         console.log(a)
-        console.log(b)
+        console.log(b) // cause of hoisting we can access b to its parent and child function
     }
 }
 
