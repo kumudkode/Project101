@@ -18,3 +18,5 @@ const calculator = {
 
 //for accessing these value use 
 // calculator.add(2,4) or use any function wth any arguments
+
+// so we have to do like this
