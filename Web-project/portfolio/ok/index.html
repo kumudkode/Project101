@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DevLab — Your Dev Partner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <div class="bg-effects">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">DevLab<span class="dot">.</span></div>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <div class="status-badge">
+            <span class="status-dot"></span> Available for Q1
+          </div>
+          <h1>Build, launch, and grow with a <span class="text-gradient">dedicated dev team.</span></h1>
+          <p class="hero-sub">
+            From idea to production, get a trusted partner for web apps, AI tools, and internal systems.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              Book a call
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <button class="btn btn-ghost" id="scrollToProjects">View projects</button>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-item">✓ No lock-in</div>
+            <div class="meta-item">✓ Full code ownership</div>
+          </div>
+        </div>
+        
+        <div class="hero-card-wrapper">
+          <div class="hero-card">
+            <div class="card-header">
+              <span class="dot-ui red"></span><span class="dot-ui yellow"></span><span class="dot-ui green"></span>
+            </div>
+            <div class="hero-card-content">
+              <p class="hero-card-label">Live Metrics</p>
+              <h2>InsightBoard</h2>
+              <div class="chart-mockup">
+                <div class="bar" style="height: 40%"></div>
+                <div class="bar" style="height: 70%"></div>
+                <div class="bar" style="height: 50%"></div>
+                <div class="bar" style="height: 85%"></div>
+                <div class="bar active" style="height: 100%"></div>
+              </div>
+              <div class="hero-card-tags">
+                <span class="tag">SaaS</span>
+                <span class="tag">Dashboard</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Portfolio</p>
+          <h2>Selected Work</h2>
+          <p>Products shipped for founders across SaaS, AI, and tools.</p>
+        </div>
+        <div class="grid projects-grid">
+          <article class="card project-card">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="tag tag-soft">AI Tool</span>
+                <span class="project-pill">Live</span>
+              </div>
+              <h3>PromptFlow Studio</h3>
+              <p>Workflow builder for AI agents with integrations to CRMs and support tools.</p>
+              <div class="card-footer">
+                <span>Founder-led</span>
+                <a href="#" class="link">Visit →</a>
+              </div>
+            </div>
+          </article>
+          <article class="card project-card">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="tag tag-soft">Internal</span>
+                <span class="project-pill pill-soft">In-house</span>
+              </div>
+              <h3>OpsControl Panel</h3>
+              <p>Internal dashboard for managing orders, tickets, and SLAs in one place.</p>
+              <div class="card-footer">
+                <span>Mid-size team</span>
+                <a href="#" class="link">Visit →</a>
+              </div>
+            </div>
+          </article>
+          <article class="card project-card">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="card-top">
+                <span class="tag tag-soft">Extension</span>
+                <span class="project-pill">Live</span>
+              </div>
+              <h3>FocusTab</h3>
+              <p>Lightweight extension that blocks distractions and syncs across devices.</p>
+              <div class="card-footer">
+                <span>Solo founder</span>
+                <a href="#" class="link">Visit →</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Capabilities</p>
+          <h2>End-to-end development</h2>
+        </div>
+        <div class="grid services-grid">
+          <div class="card service-card">
+            <div class="icon-box">💻</div>
+            <h3>Web applications</h3>
+            <p>Full-stack apps built with modern frameworks, clean APIs, and scalable infra.</p>
+          </div>
+          <div class="card service-card">
+            <div class="icon-box">🤖</div>
+            <h3>AI integration</h3>
+            <p>Integrate LLMs, automate workflows, and build AI-powered features.</p>
+          </div>
+          <div class="card service-card">
+            <div class="icon-box">⚡</div>
+            <h3>Performance</h3>
+            <p>Optimization, fast loading times, and responsive mobile interfaces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <h2>Simple Pricing</h2>
+          <p>Choose what fits your stage and roadmap.</p>
+        </div>
+        <div class="grid pricing-grid">
+          <div class="card pricing-card highlight">
+            <div class="recommended-tag">Most Popular</div>
+            <h3>Monthly Retainer</h3>
+            <div class="price-block">
+                <span class="currency">$</span><span class="amount">3k</span><span class="period">/mo</span>
+            </div>
+            <ul>
+              <li>✓ Dedicated dev capacity</li>
+              <li>✓ Pause or upgrade anytime</li>
+              <li>✓ Direct Slack access</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary full-width">Start Trial</a>
+          </div>
+          <div class="card pricing-card">
+            <h3>Project Based</h3>
+            <div class="price-block">
+                <span class="amount">Custom</span>
+            </div>
+            <ul>
+              <li>✓ Fixed scope & timeline</li>
+              <li>✓ Perfect for MVPs</li>
+              <li>✓ Clear deliverables</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline full-width">Get Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-wrapper">
+        <div class="contact-box">
+          <div class="contact-text">
+            <h2>Ready to ship?</h2>
+            <p>Tell us about your product. We usually reply within 24 hours.</p>
+          </div>
+          <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder=" " id="name" required />
+                <label for="name">Name</label>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder=" " id="email" required />
+                <label for="email">Email</label>
+            </div>
+            <div class="form-group">
+                <textarea placeholder=" " id="msg" rows="4"></textarea>
+                <label for="msg">Project details</label>
+            </div>
+            <button type="submit" class="btn btn-primary full-width">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">DevLab.</div>
+      <p>© <span id="year"></span> All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

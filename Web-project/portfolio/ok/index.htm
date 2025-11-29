@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DevLab — Future-Proof Development</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* -----------------------------------------------------------
+       1. VARIABLES & RESET
+    ----------------------------------------------------------- */
+    :root {
+      /* Palette */
+      --bg: #050505;
+      --bg-surface: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-light: rgba(255, 255, 255, 0.15);
+      
+      --primary: #6366f1;
+      --primary-glow: rgba(99, 102, 241, 0.5);
+      --accent: #a855f7;
+      
+      --text-main: #ffffff;
+      --text-muted: #949494;
+      
+      /* Spacing & Radius */
+      --nav-height: 70px;
+      --radius: 16px;
+      --max-width: 1100px;
+      
+      /* Transitions */
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    ::selection { background: var(--primary); color: white; }
+
+    /* -----------------------------------------------------------
+       2. BACKGROUND FX
+    ----------------------------------------------------------- */
+    .bg-effects {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    }
+    
+    .grid-overlay {
+      position: absolute; inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    }
+
+    .glow-orb {
+      position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+    }
+    .orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; left: 20%; animation: float 10s ease-in-out infinite alternate; }
+    .orb-2 { width: 300px; height: 300px; background: var(--accent); bottom: 10%; right: 0; opacity: 0.15; }
+
+    @keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(30px, 50px); } }
+
+    /* -----------------------------------------------------------
+       3. NAVIGATION (Upgraded)
+    ----------------------------------------------------------- */
+    .nav-wrapper {
+      position: sticky; top: 0; z-index: 100;
+      width: 100%;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    /* State when scrolled */
+    .nav-wrapper.scrolled {
+      background: rgba(5, 5, 5, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
+    }
+
+    .logo {
+      font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em;
+      display: flex; align-items: center; gap: 4px;
+      color: white; text-decoration: none;
+    }
+    .logo span { color: var(--primary); }
+
+    .nav-links {
+      display: flex; gap: 8px;
+      background: rgba(255,255,255,0.03);
+      padding: 4px; border-radius: 100px; border: 1px solid var(--border);
+    }
+
+    .nav-link {
+      text-decoration: none; color: var(--text-muted);
+      font-size: 0.85rem; font-weight: 500;
+      padding: 0.5rem 1rem; border-radius: 100px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover { color: white; background: rgba(255,255,255,0.05); }
+    
+    .nav-link.active {
+      color: white; background: rgba(255,255,255,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .nav-cta {
+      margin-left: 1rem;
+    }
+
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .nav-toggle span { width: 24px; height: 2px; background: white; transition: 0.3s; border-radius: 2px; }
+
+    /* -----------------------------------------------------------
+       4. HERO SECTION
+    ----------------------------------------------------------- */
+    .hero { padding: 8rem 0 5rem; overflow: hidden; }
+    .hero-container {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;
+      max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2);
+      color: #a5b4fc; font-size: 0.8rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem;
+    }
+    .badge-dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      margin: 0 0 1.2rem; letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .text-gradient {
+      background: linear-gradient(to right, #fff, #949494);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 480px; }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.8rem 1.5rem; border-radius: 10px;
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: transform 0.1s var(--ease), box-shadow 0.2s, background 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--primary); color: white;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    }
+    .btn-primary:hover { background: #565add; box-shadow: 0 0 30px rgba(99, 102, 241, 0.5); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05); color: white;
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--border-light); }
+
+    /* 3D Card Effect */
+    .hero-visual { perspective: 1000px; }
+    .glass-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      transform: rotateY(-12deg) rotateX(5deg);
+      box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+      transition: transform 0.5s var(--ease);
+    }
+    .glass-card:hover { transform: rotateY(0) rotateX(0); }
+
+    .mockup-header { display: flex; gap: 6px; margin-bottom: 1.5rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
+    .dot.r { background: #ef4444; } .dot.y { background: #eab308; } .dot.g { background: #22c55e; }
+
+    .stat-row { display: flex; justify-content: space-between; margin-bottom: 1rem; align-items: flex-end; }
+    .stat-bars { display: flex; gap: 6px; align-items: flex-end; height: 60px; }
+    .bar { width: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .bar.active { background: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+
+    /* -----------------------------------------------------------
+       5. GENERAL SECTIONS & GRID
+    ----------------------------------------------------------- */
+    .section { padding: 6rem 0; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    .section-head { margin-bottom: 3rem; }
+    .section-head h2 { font-size: 2rem; margin: 0 0 0.5rem; }
+    .section-head p { color: var(--text-muted); margin: 0; }
+
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+
+    /* Interactive Card */
+    .card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 0.3s var(--ease), border 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); border-color: var(--border-light); }
+
+    /* Spotlight Gradient */
+    .card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(800px circle at var(--x) var(--y), rgba(255,255,255,0.06), transparent 40%);
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon { font-size: 1.5rem; margin-bottom: 1rem; display: inline-block; }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.2rem; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; margin: 0; flex-grow: 1; }
+    .card-link { margin-top: 1.5rem; color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+    .card-link:hover { text-decoration: underline; }
+
+    /* Pricing Specifics */
+    .price { font-size: 2.5rem; font-weight: 700; color: white; margin: 1rem 0; }
+    .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+    .feature-list { list-style: none; padding: 0; margin: 0 0 2rem; color: var(--text-muted); }
+    .feature-list li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    .check { color: var(--primary); }
+
+    /* -----------------------------------------------------------
+       6. CONTACT FORM
+    ----------------------------------------------------------- */
+    .contact-container {
+      background: linear-gradient(to bottom right, #0f0f0f, #050505);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+    }
+    
+    .form-box { max-width: 500px; margin: 2rem auto 0; text-align: left; }
+    .input-group { margin-bottom: 1.2rem; }
+    .input-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    
+    input, textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: white; font-family: inherit;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    /* -----------------------------------------------------------
+       7. ANIMATIONS & RESPONSIVE
+    ----------------------------------------------------------- */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 70%; background: #0a0a0a;
+        flex-direction: column; justify-content: center;
+        border-left: 1px solid var(--border);
+        padding: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s var(--ease);
+        border-radius: 0;
+      }
+      .nav-links.open { transform: translateX(0); box-shadow: -20px 0 50px rgba(0,0,0,0.5); }
+      .nav-toggle { display: flex; z-index: 200; }
+      .nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .nav-toggle.open span:nth-child(2) { opacity: 0; }
+      .nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      
+      .hero-container { grid-template-columns: 1fr; text-align: center; padding-top: 2rem; }
+      .btn-group { justify-content: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .glass-card { margin-top: 2rem; transform: none; }
+      .glass-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-effects">
+    <div class="grid-overlay"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+  </div>
+
+  <header class="nav-wrapper" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">DevLab<span>.</span></a>
+      
+      <nav class="nav-links" id="navLinks">
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#contact" class="nav-link nav-cta">Contact</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-container">
+        <div class="hero-text fade-up">
+          <div class="badge">
+            <span class="badge-dot"></span> Available for Q1 2025
+          </div>
+          <h1>
+            Your Product, <br />
+            <span class="text-gradient">Built to Scale.</span>
+          </h1>
+          <p class="hero-sub">
+            We are the dev partner for founders who want to ship fast without breaking things. Web apps, AI integrations, and heavy lifting.
+          </p>
+          <div class="btn-group">
+            <a href="#contact" class="btn btn-primary">Book a Call</a>
+            <a href="#projects" class="btn btn-secondary">View Work</a>
+          </div>
+        </div>
+
+        <div class="hero-visual fade-up">
+          <div class="glass-card">
+            <div class="mockup-header">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            </div>
+            <div style="margin-top: 1.5rem;">
+              <div class="stat-row">
+                <span style="font-size: 0.9rem; color: #999;">Monthly Revenue</span>
+                <span style="font-weight: 700; color: #fff;">$42,800</span>
+              </div>
+              <div class="stat-bars">
+                <div class="bar" style="height: 40%"></div>
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar" style="height: 45%"></div>
+                <div class="bar" style="height: 75%"></div>
+                <div class="bar" style="height: 55%"></div>
+                <div class="bar active" style="height: 90%"></div>
+                <div class="bar" style="height: 65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head fade-up">
+          <h2>Selected Work</h2>
+          <p>Recent products shipped to production.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card fade-up">
+            <div class="card-icon">🤖</div>
+            <h3>PromptFlow AI</h3>
+            <p>A drag-and-drop builder for LLM chains. Integrates with OpenAI and LangChain.</p>
+            <a href="#" class="card-link">View Case Study →</a>
+          </article>
+          <article class="card fade-up">
+            <div class="card-icon">💼</div>
+            <h3>TaskMaster CRM</h3>
+            <p>Internal tooling for a logistics company handling 10k daily orders.</p>
+            <a href="#" class="card-link">View Case Study →</a>
+          </article>
+          <article class="card fade-up">
+            <div class="card-icon">⚡</div>
+            <h3>Bolt Analytics</h3>
+            <p>Real-time dashboarding for high-frequency trading data visualization.</p>
+            <a href="#" class="card-link">View Case Study →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head fade-up">
+          <h2>Capabilities</h2>
+          <p>Full-stack expertise from design to deployment.</p>
+        </div>
+        <div class="grid grid-2">
+          <div class="card fade-up">
+            <h3>Web Applications</h3>
+            <p>React, Next.js, and Node.js applications built with clean architecture and type safety.</p>
+          </div>
+          <div class="card fade-up">
+            <h3>AI Integration</h3>
+            <p>Vector databases, RAG pipelines, and custom fine-tuning for business-specific AI tools.</p>
+          </div>
+          <div class="card fade-up">
+            <h3>Cloud Infrastructure</h3>
+            <p>AWS & Vercel setups that scale automatically and stay secure.</p>
+          </div>
+          <div class="card fade-up">
+            <h3>Mobile Responsive</h3>
+            <p>Interfaces that feel native on every device using modern CSS and PWA standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head fade-up">
+          <h2>Simple Pricing</h2>
+          <p>No hidden fees. Pause anytime.</p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card fade-up">
+            <h3>Retainer</h3>
+            <div class="price">$3,000<span>/mo</span></div>
+            <ul class="feature-list">
+              <li><span class="check">✓</span> Dedicated Developer</li>
+              <li><span class="check">✓</span> Slack Access</li>
+              <li><span class="check">✓</span> Cancel anytime</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary full-width">Start Trial</a>
+          </div>
+          <div class="card fade-up">
+            <h3>Project</h3>
+            <div class="price">Custom</div>
+            <ul class="feature-list">
+              <li><span class="check">✓</span> Fixed Scope</li>
+              <li><span class="check">✓</span> Fixed Budget</li>
+              <li><span class="check">✓</span> Clear Milestone</li>
+            </ul>
+            <a href="#contact" class="btn btn-secondary full-width">Get Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container fade-up">
+        <div class="contact-container">
+          <h2>Let's build something.</h2>
+          <p style="color: #999; margin-top: 0.5rem;">Fill out the form below and we'll reply within 24h.</p>
+          
+          <form class="form-box">
+            <div class="input-group">
+              <label>Name</label>
+              <input type="text" placeholder="John Doe" required />
+            </div>
+            <div class="input-group">
+              <label>Email</label>
+              <input type="email" placeholder="john@company.com" required />
+            </div>
+            <div class="input-group">
+              <label>Project Details</label>
+              <textarea rows="4" placeholder="Tell us about your idea..."></textarea>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align: center; padding: 2rem; color: #555; font-size: 0.9rem; border-top: 1px solid #111;">
+    <p>&copy; 2025 DevLab Studio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 1. HEADER SCROLL EFFECT
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // 2. MOBILE MENU TOGGLE
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.classList.toggle('open');
+      // Prevent scrolling when menu is open
+      document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        links.classList.remove('open');
+        toggle.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // 3. SPOTLIGHT HOVER EFFECT (Clean interaction)
+    const cards = document.querySelectorAll('.card');
+    document.addEventListener('mousemove', (e) => {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+    });
+
+    // 4. SCROLL SPY (Active Nav State)
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(li => {
+        li.classList.remove('active');
+        if (li.getAttribute('href').includes(current)) {
+          li.classList.add('active');
+        }
+      });
+    });
+
+    // 5. STAGGERED FADE IN
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
