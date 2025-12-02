@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealthHub — Health Management System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="logo">HealthHub</div>
+        <nav class="topnav">
+          <button class="btn-icon sidebar-toggle" aria-label="Toggle sidebar">
+            ☰
+          </button>
+          <div class="top-actions">
+            <button class="btn btn-ghost" id="openNewAppointment">
+              New Appointment
+            </button>
+            <div class="user">Dr. Priya <span class="avatar">PR</span></div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-inner container">
+          <div class="profile">
+            <div class="avatar big">DR</div>
+            <div>
+              <p class="name">Dr. Priya Rao</p>
+              <p class="role">General Physician</p>
+            </div>
+          </div>
+          <nav class="menu">
+            <a class="menu-item active" data-section="dashboard">Dashboard</a>
+            <a class="menu-item" data-section="patients">Patients</a>
+            <a class="menu-item" data-section="appointments">Appointments</a>
+            <a class="menu-item" data-section="prescriptions">Prescriptions</a>
+            <a class="menu-item" data-section="billing">Billing</a>
+            <a class="menu-item" data-section="messages">Messages</a>
+            <a class="menu-item" data-section="settings">Settings</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="main container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active-section">
+          <div class="section-head">
+            <h2>Dashboard</h2>
+            <p class="muted">Overview of today's clinic</p>
+          </div>
+          <div class="grid stats-grid">
+            <div class="card">
+              <p class="card-title">Patients</p>
+              <h3 id="statPatients">0</h3>
+              <p class="muted">Total registered</p>
+            </div>
+            <div class="card">
+              <p class="card-title">Appointments</p>
+              <h3 id="statAppointments">0</h3>
+              <p class="muted">Today</p>
+            </div>
+            <div class="card">
+              <p class="card-title">Pending Bills</p>
+              <h3 id="statBills">$0</h3>
+              <p class="muted">Outstanding</p>
+            </div>
+            <div class="card">
+              <p class="card-title">Messages</p>
+              <h3 id="statMessages">0</h3>
+              <p class="muted">Unread</p>
+            </div>
+          </div>
+
+          <div class="grid panels-grid">
+            <div class="card panel">
+              <h3>Today's Appointments</h3>
+              <ul id="todayAppointments" class="list"></ul>
+            </div>
+            <div class="card panel">
+              <h3>Recent Patients</h3>
+              <ul id="recentPatients" class="list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Patients Section -->
+        <section id="patients" class="section">
+          <div class="section-head">
+            <h2>Patients</h2>
+            <div class="actions">
+              <input id="searchPatient" placeholder="Search patients" />
+              <button class="btn btn-primary" id="openNewPatient">
+                + Add Patient
+              </button>
+            </div>
+          </div>
+
+          <div class="card table-card">
+            <table class="patients-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Contact</th>
+                  <th>Last Visit</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="patientsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Appointments Section -->
+        <section id="appointments" class="section">
+          <div class="section-head">
+            <h2>Appointments</h2>
+            <div class="actions">
+              <button class="btn" id="filterToday">Today</button>
+              <button class="btn" id="filterAll">All</button>
+              <button class="btn btn-primary" id="openNewAppointment2">
+                Schedule
+              </button>
+            </div>
+          </div>
+          <div class="card table-card">
+            <table class="patients-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Patient</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Prescriptions Section -->
+        <section id="prescriptions" class="section">
+          <div class="section-head">
+            <h2>Prescriptions</h2>
+            <p class="muted">Create and manage prescriptions</p>
+          </div>
+          <div class="card panel">
+            <p class="muted">
+              No prescriptions yet. Create one from an appointment.
+            </p>
+          </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages" class="section">
+          <div class="section-head">
+            <h2>Messages</h2>
+          </div>
+          <div class="card panel">
+            <p class="muted">Inbox will appear here.</p>
+          </div>
+        </section>
+
+        <!-- Billing & Settings placeholders -->
+        <section id="billing" class="section">
+          <div class="section-head"><h2>Billing</h2></div>
+        </section>
+        <section id="settings" class="section">
+          <div class="section-head"><h2>Settings</h2></div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© <span id="year"></span> HealthHub. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+      <div class="modal">
+        <button class="modal-close" id="closeModal">✕</button>
+        <h3 id="modalTitle">New Patient</h3>
+        <form id="modalForm">
+          <label>Name <input required id="patientName" /></label>
+          <label
+            >Age <input required id="patientAge" type="number" min="0"
+          /></label>
+          <label>Contact <input id="patientContact" /></label>
+          <label>Notes <textarea id="patientNotes"></textarea></label>
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn" id="cancelModal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
