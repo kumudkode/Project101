@@ -82,7 +82,8 @@ function renderTodayAppointments() {
     .filter((a) => a.date === today)
     .forEach((a) => {
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${a.time}</strong> — ${a.patient} <span class="muted">(${a.reason})</span>`;
+      li.innerHTML = `<div><strong>${a.time}</strong> — ${a.patient} <span class="muted">(${a.reason})</span></div><div class="meta">${a.status}</div>`;
+      li.classList.add("fade-up");
       el.appendChild(li);
     });
 }
@@ -92,7 +93,8 @@ function renderRecentPatients() {
   el.innerHTML = "";
   state.patients.slice(0, 6).forEach((p) => {
     const li = document.createElement("li");
-    li.innerHTML = `<strong>${p.name}</strong><br><span class="text-muted">Last visit: ${p.lastVisit}</span>`;
+    li.innerHTML = `<div><strong>${p.name}</strong><div class="text-muted">Last visit: ${p.lastVisit}</div></div>`;
+    li.classList.add("fade-up");
     el.appendChild(li);
   });
 }
@@ -105,6 +107,7 @@ function renderPatientsTable(filter = "") {
     .forEach((p) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `<td>${p.name}</td><td>${p.age}</td><td>${p.contact}</td><td>${p.lastVisit}</td><td><button class="btn" data-id="${p.id}" onclick="viewPatient(${p.id})">View</button></td>`;
+      tr.classList.add("fade-up");
       tbody.appendChild(tr);
     });
 }
@@ -118,6 +121,7 @@ function renderAppointmentsTable(filter = "all") {
     .forEach((a) => {
       const tr = document.createElement("tr");
       tr.innerHTML = `<td>${a.time}</td><td>${a.patient}</td><td>${a.reason}</td><td>${a.status}</td><td><button class="btn" onclick="completeAppointment(${a.id})">Complete</button></td>`;
+      tr.classList.add("fade-up");
       tbody.appendChild(tr);
     });
 }
@@ -161,10 +165,21 @@ function openPatientModal() {
   qs("#patientContact").value = "";
   qs("#patientNotes").value = "";
   modalOverlay.classList.remove("hidden");
+  // animate modal in
+  const modal = modalOverlay.querySelector(".modal");
+  if (modal) {
+    modal.classList.remove("show");
+    void modal.offsetWidth;
+    modal.classList.add("show");
+  }
 }
 
 function closeModal() {
-  modalOverlay.classList.add("hidden");
+  const modal = modalOverlay.querySelector(".modal");
+  if (modal) {
+    modal.classList.remove("show");
+  }
+  setTimeout(() => modalOverlay.classList.add("hidden"), 180);
 }
 
 openNewPatientBtn.addEventListener("click", openPatientModal);
@@ -189,6 +204,7 @@ modalForm.addEventListener("submit", (e) => {
   });
   closeModal();
   renderAll();
+  showToast(`${name} added`);
 });
 
 function lastOr(v) {
@@ -246,6 +262,32 @@ qsa(".menu-item").forEach((it) =>
     qs("#" + section).classList.add("active-section");
   })
 );
+
+// Toast notifications
+function showToast(text) {
+  let t = document.querySelector(".toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.className = "toast";
+    t.style.position = "fixed";
+    t.style.right = "20px";
+    t.style.bottom = "20px";
+    t.style.background = "rgba(0,0,0,0.8)";
+    t.style.color = "#fff";
+    t.style.padding = "10px 14px";
+    t.style.borderRadius = "10px";
+    t.style.boxShadow = "0 8px 24px rgba(2,6,23,0.3)";
+    document.body.appendChild(t);
+  }
+  t.textContent = text;
+  t.style.opacity = "1";
+  t.style.transform = "translateY(0)";
+  t.style.transition = "all .36s ease";
+  setTimeout(() => {
+    t.style.opacity = "0";
+    t.style.transform = "translateY(12px)";
+  }, 1600);
+}
 
 // footer year
 qs("#year").textContent = new Date().getFullYear();

@@ -5,23 +5,27 @@ function Layout() {
   return (
     <div className="layout">
       <nav className="navbar">
-        <div className="brand">
-          MyApp
+        <div className="nav-container">
+          <div className="brand">
+            MediCare Pro
+          </div>
+          <ul className="nav-list">
+            <li>
+              <Link to="/" className="nav-link">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/about" className="nav-link">Patient Records</Link>
+            </li>
+            <li>
+              <Link to="/contact" className="nav-link">Appointments</Link>
+            </li>
+          </ul>
         </div>
-        <ul className="nav-list">
-          <li>
-            <Link to="/" className="nav-link">Home</Link>
-          </li>
-          <li>
-            <Link to="/about" className="nav-link">About</Link>
-          </li>
-          <li>
-            <Link to="/contact" className="nav-link">Contact</Link>
-          </li>
-        </ul>
       </nav>
       <main className="main-content">
-        <Outlet />
+        <div className="content-container">
+          <Outlet />
+        </div>
       </main>
     </div>
   )

@@ -1,0 +1,245 @@
+.records-page {
+  padding: 2rem 0;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.page-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.records-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.record-card {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.record-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--background), #f1f5f9);
+  border-bottom: 1px solid var(--border);
+}
+
+.record-type {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.record-type.consultation {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+}
+
+.record-type.lab {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--secondary);
+}
+
+.record-type.prescription {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--accent);
+}
+
+.record-date {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.record-content {
+  padding: 1.5rem;
+}
+
+.record-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.record-details {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 120px;
+}
+
+.detail-value {
+  color: var(--text-primary);
+}
+
+.status-normal {
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.record-notes {
+  background: var(--background);
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary);
+  margin-top: 1rem;
+}
+
+.record-notes p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.lab-results {
+  display: grid;
+  gap: 0.75rem;
+  background: var(--background);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.lab-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.lab-item:last-child {
+  border-bottom: none;
+}
+
+.lab-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lab-value {
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.lab-value.normal {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--secondary);
+}
+
+.lab-range {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.prescription-list {
+  background: var(--background);
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.prescription-item {
+  padding: 0.75rem 0;
+}
+
+.med-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.med-instructions {
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.med-duration {
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.record-footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .page-actions {
+    justify-content: flex-start;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .detail-label {
+    min-width: auto;
+  }
+  
+  .lab-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
