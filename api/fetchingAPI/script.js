@@ -41,3 +41,16 @@ fetch('https://apis.scrimba.com/dog.ceo/api/breeds/image/random')
    6. appendChild() = "Put the <img> on the webpage so people can see it"
 */ 
 
+// fetch() makes the API request
+
+// First .then() converts JSON response to JavaScript object
+
+// Second .then() processes the data
+
+// createElement() creates new img element
+
+// src sets the image URL from API response
+
+// alt adds accessibility text
+
+// appendChild() adds the image to the page
