@@ -7,6 +7,8 @@ fetch('https://apis.scrimba.com/dog.ceo/api/breeds/image/random')
        JSON is like a wrapped gift box, response.json() unwraps it */
     .then(response => response.json())
 
+    // .then(hello => hello.json()) you can also change its name from response to any
+
     /* STEP 3: Now we have the actual data (the unwrapped gift)
        The data looks like this: { message: "https://dog-image-url.jpg", status: "success" }
        data.message contains the actual image URL */
@@ -54,3 +56,15 @@ fetch('https://apis.scrimba.com/dog.ceo/api/breeds/image/random')
 // alt adds accessibility text
 
 // appendChild() adds the image to the page
+
+/* shortest way
+
+fetch('https://apis.scrimba.com/dog.ceo/api/breeds/image/random')
+  .then(res => res.json())
+  .then(data => {
+    const img = document.createElement('img') // creating html image element 
+    img.src = data.message // adding src = data.message
+    document.getElementById('img-container').appendChild(img)
+  })
+
+*/
