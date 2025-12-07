@@ -40,3 +40,4 @@ fetch('https://apis.scrimba.com/dog.ceo/api/breeds/image/random')
    5. imageElement.src = "Tell the <img> where to get the picture"
    6. appendChild() = "Put the <img> on the webpage so people can see it"
 */ 
+
