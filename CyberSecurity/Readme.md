@@ -1,4 +1,5 @@
 # Security
+
 - Security is not just about code its how we think and manage flaws in our website
 - Security is a process not a product
 - Always keep your dependencies up to date
@@ -10,16 +11,20 @@
 - Educate yourself and your team about common security threats like SQL injection, XSS, CSRF, etc.
 - Use security headers like Content Security Policy (CSP), X-Content-Type-Options, X-Frame-Options, etc. to protect against common attacks
 
-
 ---
+
 We have to look to our system from High level and model .
 What kind of threat could show up in our design
-We gonna handle this via a 
+We gonna handle this via a
 STRIDE
 S = Spoofing (Could someone pretend to be someone else?)
-T = Tampering (Could someone change data they shouldn’t?)
-R = Repudiation (Could someone do something and deny it later?)
-I = Information Disclosure (Could private data leak out?)
-D = Denial of Service (Could someone stop the app from working?)
-E = Elevation of Privilege (Could someone get powers they shouldn’t have?)
 
+T = Tampering (Could someone change data they shouldn’t?)
+
+R = Repudiation (Could someone do something and deny it later?)
+
+I = Information Disclosure (Could private data leak out?)
+
+D = Denial of Service (Could someone stop the app from working?) or hackers did DDoS attack it means Distributed Denial of Service where many computers attack one server to make it down
+
+E = Elevation of Privilege (Could someone get powers they shouldn’t have?) it means a normal user get admin access
