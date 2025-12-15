@@ -46,4 +46,7 @@ output automatically cleaned up cause of --rm
 
 ```
 
+- here first 0 is for all interfaces inside the container and second 0 is for all interfaces outside the container
+- so if you have a web server running on port 80 inside the container and you want to access it from outside on port 8080 you can use -p 8080:80
+- now if you access http://localhost:8080 on your host machine you will be able to access the web server running inside the container
 
