@@ -41,3 +41,5 @@ Fix: Avoid logging private details; blur or hide sensitive info in logs.
 ---
 
 Need a refresher? Check out `owaspTop10_reference.md`!
+
+
