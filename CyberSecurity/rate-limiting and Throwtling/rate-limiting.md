@@ -37,3 +37,7 @@ There are several common methods for implementing rate limiting:
 9. Distributed Rate Limiting: This method implements rate limiting across multiple servers or instances, ensuring consistent enforcement of limits in a distributed environment.
 
 10. Hybrid Approaches: This method combines multiple rate limiting techniques to achieve more effective traffic control and protection against various types of attacks.
+
+11. Response Headers: This method includes rate limit information in response headers, allowing clients to understand their current usage and limits.
+Implementing rate limiting is crucial for maintaining the performance, reliability, and security of web applications and
+
