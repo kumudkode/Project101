@@ -18,3 +18,9 @@ const rateLimit = require('express-rate-limit');
 
 ```
 ![alt text](image-1.png)
+
+# guidelines
+- Choose appropriate rate limits based on your application's needs and user behavior.
+- Monitor and adjust rate limits as necessary to balance security and user experience.
+- Consider using different rate limits for different endpoints or user roles.
+- Implement proper error handling to inform users when they exceed rate limits.
