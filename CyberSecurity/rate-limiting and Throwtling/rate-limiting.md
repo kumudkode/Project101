@@ -41,3 +41,6 @@ There are several common methods for implementing rate limiting:
 11. Response Headers: This method includes rate limit information in response headers, allowing clients to understand their current usage and limits.
 Implementing rate limiting is crucial for maintaining the performance, reliability, and security of web applications and
 
+12. services. It helps protect against abuse, ensures fair usage, and mitigates the risk of denial-of-service attacks.
+
+13. Monitoring and Logging: This method involves tracking rate limit violations and logging them for analysis, which can help identify potential abuse patterns and inform future rate limiting strategies.
