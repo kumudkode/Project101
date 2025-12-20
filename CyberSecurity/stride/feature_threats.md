@@ -35,3 +35,5 @@ Possible STRIDE threats:
 4. Information Disclosure – Private videos or teacher comments are visible to unauthorized users.
 5. Denial of Service – Excessive or repeated uploads crash or slow the feedback system.
 6. Elevation of Privilege – A teacher accesses admin-only tools or other teachers’ feedback areas.
+
+- By considering these threats early, developers can implement safeguards to protect both students and teachers in the portal!
