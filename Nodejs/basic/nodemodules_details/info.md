@@ -1,5 +1,7 @@
 ![alt text](image.png)
 
+![alt text](image-3.png)
+
 we install the figlet module using the npm install figlet command. This creates a node_modules folder in our project directory that contains the figlet module and its dependencies.
 
 
