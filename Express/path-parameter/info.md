@@ -6,6 +6,11 @@ Generally instagram or any website uses this for storing new user details or any
 
 using path parameters we can capture values specified at their position in the URL.
 
+/ 
+/abc
+/xyz
+/user/:username
+
 e.g in instagram.com/user/kumud
 or instagram.com/user/kumud/123
 
