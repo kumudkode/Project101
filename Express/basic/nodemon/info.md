@@ -9,3 +9,5 @@ Lets see how to install and use nodemon:
 like before we were keep typing node script.js
 now we now just type:
    nodemon app.js
+
+3. Nodemon will start your application and monitor the files in the directory for any changes. If you make any changes to your code and save the file, nodemon will automatically restart the application for you.
