@@ -78,3 +78,7 @@ Now Lets make Instagram Profile Page using EJS Templating Engine.
 
 ![alt text](image-11.png)
 
+=> Partials in EJS:
+- Partials are reusable components that can be included in multiple templates.
+
+
